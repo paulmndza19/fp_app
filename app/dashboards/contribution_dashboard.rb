@@ -7,12 +7,21 @@ class ContributionDashboard < Administrate::BaseDashboard
   # Each different type represents an Administrate::Field object,
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
+  #
+  #
+
+  MONTHS = [
+    '', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+  ]
+
+  YEAR_OPTIONS = (2000...(Date.today + 1.year).year).to_a.unshift(' ')
+
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    amount: Field::String.with_options(searchable: false),
-    month: Field::String,
+    amount: Field::Number,
+    month: Field::Select.with_options(collection: MONTHS),
     user: Field::BelongsTo,
-    year: Field::String,
+    year: Field::Select.with_options(collection: YEAR_OPTIONS),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -32,7 +41,6 @@ class ContributionDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     amount
     month
     user
