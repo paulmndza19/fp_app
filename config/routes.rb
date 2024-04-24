@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  namespace :admin do
+    resources :contributions
+    resources :users
+
+    root to: "contributions#index"
+  end
+  resources :contributions
+
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   root to: "home#index"
 end

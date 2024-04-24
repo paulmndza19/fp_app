@@ -1,0 +1,27 @@
+<div id="<%= dom_id contribution %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= contribution.user_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Amount:</strong>
+    <%= contribution.amount %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Month:</strong>
+    <%= contribution.month %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Year:</strong>
+    <%= contribution.year %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this contribution", contribution, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this contribution", edit_contribution_path(contribution), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
