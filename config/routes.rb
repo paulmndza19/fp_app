@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :claim_requests
   resources :claim_request_types
   namespace :admin do
     resources :contributions
