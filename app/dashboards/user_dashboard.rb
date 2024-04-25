@@ -7,6 +7,13 @@ class UserDashboard < Administrate::BaseDashboard
   # Each different type represents an Administrate::Field object,
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
+  #
+
+  USER_TYPE = [
+    'Member',
+    'Admin'
+  ]
+
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     birthday: Field::Date,
@@ -30,9 +37,10 @@ class UserDashboard < Administrate::BaseDashboard
     sign_in_count: Field::Number,
     unconfirmed_email: Field::String,
     unlock_token: Field::String,
-    user_type: Field::String,
+    user_type: Field::Select.with_options(collection: USER_TYPE),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    password: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -71,6 +79,7 @@ class UserDashboard < Administrate::BaseDashboard
     email
     birthday
     user_type
+    password
   ].freeze
 
   # COLLECTION_FILTERS
@@ -88,7 +97,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    "#{user.name}"
+  end
 end

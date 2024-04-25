@@ -18,7 +18,10 @@ class ContributionDashboard < Administrate::BaseDashboard
 
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    amount: Field::Number,
+    amount: Field::Number.with_options(
+      prefix: "₱",
+      decimals: 2,
+    ),
     month: Field::Select.with_options(collection: MONTHS),
     user: Field::BelongsTo,
     year: Field::Select.with_options(collection: YEAR_OPTIONS),
@@ -32,18 +35,18 @@ class ContributionDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
+    user
     amount
     month
-    user
+    year
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
+    user
     amount
     month
-    user
     year
     created_at
     updated_at
@@ -53,9 +56,9 @@ class ContributionDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    user
     amount
     month
-    user
     year
   ].freeze
 
@@ -69,12 +72,15 @@ class ContributionDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = {
+    month: -> (resources, attr) {resources.where(month: attr)},
+    year: -> (resources, attr) {resources.where(year: attr)}
+  }.freeze
 
   # Overwrite this method to customize how contributions are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(contribution)
-  #   "Contribution ##{contribution.id}"
-  # end
+  def display_resource(contribution)
+    "#{contribution.user.name} #{contribution.month} #{contribution.year} Contribution"
+  end
 end
