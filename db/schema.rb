@@ -14,7 +14,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_034408) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "contributions", force: :cascade do |t|
+  create_table "contributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.decimal "amount"
     t.string "month"
