@@ -27,6 +27,8 @@ class ContributionDashboard < Administrate::BaseDashboard
     year: Field::Select.with_options(collection: YEAR_OPTIONS),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    created_by: Field::String,
+    updated_by: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -39,6 +41,8 @@ class ContributionDashboard < Administrate::BaseDashboard
     amount
     month
     year
+    created_by
+    updated_by
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

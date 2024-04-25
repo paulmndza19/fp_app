@@ -79,5 +79,11 @@ group :test do
   gem "webdrivers"
 end
 
+# CSS Framework
 gem "tailwindcss-rails", "~> 2.4"
+# Admin Dashboard
 gem "administrate"
+# Audit Trail
+gem "paper_trail"
+# Soft delete
+gem "paranoia", "~> 2.2"

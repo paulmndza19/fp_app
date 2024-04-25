@@ -6,7 +6,7 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
-    before_action :authenticate_admin
+    before_action :authenticate_admin, :set_paper_trail_whodunnit
 
     def authenticate_admin
       authenticate_user!
