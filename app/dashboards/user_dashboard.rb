@@ -40,7 +40,7 @@ class UserDashboard < Administrate::BaseDashboard
     user_type: Field::Select.with_options(collection: USER_TYPE),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    password: Field::String
+    password: Field::Password
   }.freeze
 
   # COLLECTION_ATTRIBUTES
