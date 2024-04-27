@@ -1,7 +1,5 @@
 module Admin
-  class UsersController < Admin::ApplicationController
-    # before_action :set_temporary_password, only: [:create]
-
+  class RolesController < Admin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -9,19 +7,6 @@ module Admin
     #   super
     #   send_foo_updated_email(requested_resource)
     # end
-
-    def create
-      params[:user][:password] = SecureRandom.hex(6);
-      raw, hashed = Devise.token_generator.generate(User, :reset_password_token)
-
-      super do |resource|
-        resource.reset_password_token = hashed
-        resource.reset_password_sent_at = Time.zone.now
-        resource.save
-
-        resource.send_reset_password_instructions
-      end
-    end
 
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`
@@ -49,17 +34,11 @@ module Admin
     # empty values into nil values. It uses other APIs such as `resource_class`
     # and `dashboard`:
     #
-    def resource_params
-      params.require(:user).permit(
-        :first_name,
-        :middle_name,
-        :last_name,
-        :email,
-        :birthday,
-        :role_id,
-        :password,
-      )
-    end
+    # def resource_params
+    #   params.require(resource_class.model_name.param_key).
+    #     permit(dashboard.permitted_attributes(action_name)).
+    #     transform_values { |value| value == "" ? nil : value }
+    # end
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information

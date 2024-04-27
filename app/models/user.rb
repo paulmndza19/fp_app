@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  belongs_to :role
   has_many :contributions
 
   def name
@@ -11,6 +12,6 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    user_type.downcase == 'admin'
+    role.name.downcase == 'admin'
   end
 end

@@ -9,11 +9,6 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   #
 
-  USER_TYPE = [
-    'Member',
-    'Admin'
-  ]
-
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     birthday: Field::Date,
@@ -37,7 +32,7 @@ class UserDashboard < Administrate::BaseDashboard
     sign_in_count: Field::Number,
     unconfirmed_email: Field::String,
     unlock_token: Field::String,
-    user_type: Field::Select.with_options(collection: USER_TYPE),
+    role: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     password: Field::Password
@@ -53,7 +48,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     email
     birthday
-    user_type
+    role
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -64,7 +59,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     email
     birthday
-    user_type
+    role
     created_at
     updated_at
   ].freeze
@@ -78,7 +73,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     email
     birthday
-    user_type
+    role
   ].freeze
 
   # COLLECTION_FILTERS

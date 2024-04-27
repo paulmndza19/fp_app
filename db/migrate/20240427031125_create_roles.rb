@@ -1,6 +1,6 @@
-class CreateClaimRequestTypes < ActiveRecord::Migration[7.1]
+class CreateRoles < ActiveRecord::Migration[7.1]
   def change
-    create_table :claim_request_types do |t|
+    create_table :roles do |t|
       t.string :name, null: false, index: { unique: true }
 
       t.timestamps
