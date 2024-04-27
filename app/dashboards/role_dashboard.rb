@@ -55,6 +55,6 @@ class RoleDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(role)
-    role.name
+    role.name.upcase_first
   end
 end

@@ -11,15 +11,17 @@ module Admin
     # end
 
     def create
-      params[:user][:password] = SecureRandom.hex(6);
-      raw, hashed = Devise.token_generator.generate(User, :reset_password_token)
+      ActiveRecord::Base.transaction do
+        params[:user][:password] = SecureRandom.hex(6);
+        raw, hashed = Devise.token_generator.generate(User, :reset_password_token)
 
-      super do |resource|
-        resource.reset_password_token = hashed
-        resource.reset_password_sent_at = Time.zone.now
-        resource.save
+        super do |resource|
+          resource.reset_password_token = hashed
+          resource.reset_password_sent_at = Time.zone.now
+          resource.save
 
-        resource.send_reset_password_instructions
+          resource.send_reset_password_instructions
+        end
       end
     end
 
