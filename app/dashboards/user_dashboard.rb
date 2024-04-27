@@ -79,7 +79,6 @@ class UserDashboard < Administrate::BaseDashboard
     email
     birthday
     user_type
-    password
   ].freeze
 
   # COLLECTION_FILTERS

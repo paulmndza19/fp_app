@@ -1,9 +1,19 @@
-<div class="flex justify-center align-center mt-12">
-  <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+<div class="flex justify-left align-center mt-12">
+  <% if @current_user.is_admin? %>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white mx-6">
+      <div class="px-6 py-4">
+        <div class=" mb-2 text-gray-500">Total Contributions</div>
+        <p class="text-gray-700 text-base font-bold text-xl">
+          <%= number_to_currency(@total_contributions, unit: "₱") %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+  <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white mx-6">
     <div class="px-6 py-4">
-      <div class=" mb-2 text-gray-500">Total Contributions</div>
+      <div class=" mb-2 text-gray-500">Your Total Contributions</div>
       <p class="text-gray-700 text-base font-bold text-xl">
-        <%= number_to_currency(@total_contributions, unit: "₱") %>
+        <%= number_to_currency(@your_total_contributions, unit: "₱") %>
       </p>
     </div>
   </div>

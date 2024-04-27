@@ -3,7 +3,7 @@ class ContributionsController < ApplicationController
 
   # GET /contributions or /contributions.json
   def index
-    @contributions = Contribution.all
+    @contributions = @current_user.contributions
   end
 
   # GET /contributions/1 or /contributions/1.json

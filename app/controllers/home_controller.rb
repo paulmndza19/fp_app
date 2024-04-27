@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
-    @total_contributions = current_user.contributions.sum(:amount)
+    @your_total_contributions = current_user.contributions.sum(:amount)
+
+    @total_contributions = Contribution.sum(:amount)
   end
 end
