@@ -17,7 +17,7 @@ class ContributionDashboard < Administrate::BaseDashboard
   YEAR_OPTIONS = (2000...(Date.today + 1.year).year).to_a.unshift(' ')
 
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
+    id: Field::String,
     amount: Field::Number.with_options(
       prefix: "₱",
       decimals: 2,
@@ -28,8 +28,8 @@ class ContributionDashboard < Administrate::BaseDashboard
     receipt_number: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    created_by: Field::String,
-    updated_by: Field::String,
+    # created_by: Field::String,
+    # updated_by: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -43,8 +43,6 @@ class ContributionDashboard < Administrate::BaseDashboard
     amount
     month
     year
-    created_by
-    updated_by
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

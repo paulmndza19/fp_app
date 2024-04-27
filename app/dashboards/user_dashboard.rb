@@ -10,7 +10,7 @@ class UserDashboard < Administrate::BaseDashboard
   #
 
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
+    id: Field::String,
     birthday: Field::Date,
     confirmation_sent_at: Field::DateTime,
     confirmation_token: Field::String,

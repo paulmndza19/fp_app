@@ -17,6 +17,8 @@ rails db:create
 rails db:migrate
 rails db:seed
 
+rails tailwindcss:watch
+
 rails s
 ```
 

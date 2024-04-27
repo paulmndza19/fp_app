@@ -8,8 +8,12 @@ class ClaimRequestTypeDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
+    id: Field::String,
     name: Field::String,
+    amount: Field::Number.with_options(
+      prefix: "₱",
+      decimals: 2,
+    ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -30,6 +34,7 @@ class ClaimRequestTypeDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     name
+    amount
     created_at
     updated_at
   ].freeze
@@ -39,6 +44,7 @@ class ClaimRequestTypeDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     name
+    amount
   ].freeze
 
   # COLLECTION_FILTERS

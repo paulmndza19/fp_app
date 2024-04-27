@@ -1,8 +1,8 @@
 class CreateClaimRequests < ActiveRecord::Migration[7.1]
   def change
-    create_table :claim_requests do |t|
-      t.references :user, null: false, foreign_key: true
-      t.references :claim_request_type, null: false, foreign_key: true
+    create_table :claim_requests, id: :uuid do |t|
+      t.references :user, null: false, foreign_key: true, type: :uuid
+      t.references :claim_request_type, null: false, foreign_key: true, type: :uuid
       t.string :status
       t.decimal :amount
 
