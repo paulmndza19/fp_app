@@ -35,7 +35,6 @@ class Contribution < ApplicationRecord
   private
 
   def set_receipt_number
-    latest_contribution = Contribution.order(created_at: :desc).limit(1).first
     latest_receipt_number_length = latest_receipt_number.nil? ? 1 : latest_receipt_number.length
 
     self.receipt_number = "#{'0' * (RECEIPT_NUMBER_LENGTH - latest_receipt_number_length)}#{latest_receipt_number.to_i + 1}"

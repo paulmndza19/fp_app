@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   belongs_to :role
   has_many :contributions
+  has_many :claim_requests
 
   def name
     "#{first_name} #{last_name}"

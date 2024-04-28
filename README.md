@@ -2,7 +2,7 @@
 ## Getting Started
 
 ### Requirements
-- Ruby 3.0.3
+- Ruby 3.2.3
 - Rails 7
 - Postgresql
 

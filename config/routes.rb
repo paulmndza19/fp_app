@@ -7,11 +7,17 @@ Rails.application.routes.draw do
     resources :roles
     resources :users
     resources :claim_request_types
-    # resources :claim_requests
+    resources :claim_requests, only: %i[
+      index
+      edit
+      update
+      show
+    ]
 
     root to: "contributions#index"
   end
   resources :contributions
+  resources :claim_requests, only: [:index, :new, :create]
 
   devise_for :users
 

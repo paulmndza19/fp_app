@@ -1,37 +1,38 @@
-<%= form_with(model: claim_request, class: "contents") do |form| %>
-  <% if claim_request.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(claim_request.errors.count, "error") %> prohibited this claim_request from being saved:</h2>
+<div class="container mx-auto px-4 sm:px-8">
+  <div class="pb-4">
+    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+      <div
+        class="inline-block min-w-full overflow-hidden"
+      >
+        <%= form_with(model: @claim_request) do |form| %>
+          <% if claim_request.errors.any? %>
+            <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+              <h2><%= pluralize(claim_request.errors.count, "error") %> prohibited this claim_request from being saved:</h2>
 
-      <ul>
-        <% claim_request.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+              <ul>
+                <% claim_request.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+
+          <div class="my-5 w-full flex flex-col">
+            <%= form.label :claim_request_type_id, class: "font-bold" %>    
+            <% claim_request_type_array = ClaimRequestType.all.map { |claim_request_type| [claim_request_type.name, claim_request_type.id] } %>
+            <%= select_tag("claim_request[claim_request_type_id]", options_for_select(claim_request_type_array)) %>
+            <input type="hidden" name="claim_request[user_id]" value="<%= @current_user.id %>">
+          </div>
+
+
+          <div class="inline">
+            <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer w-full" %>
+          </div>
         <% end %>
-      </ul>
+      </div>
     </div>
-  <% end %>
-
-  <div class="my-5">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
+</div>
 
-  <div class="my-5">
-    <%= form.label :claim_request_type_id %>
-    <%= form.text_field :claim_request_type_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
 
-  <div class="my-5">
-    <%= form.label :status %>
-    <%= form.text_field :status, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :amount %>
-    <%= form.text_field :amount, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
-<% end %>
