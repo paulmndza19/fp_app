@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :roles
   resources :claim_request_types
 
-  namespace :admin do
+  namespace :admin, admin: true do
     resources :contributions
     resources :roles
     resources :users

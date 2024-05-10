@@ -87,3 +87,5 @@ gem "administrate"
 gem "paper_trail"
 # Soft delete
 gem "paranoia", "~> 2.2"
+# Adminstrate Tailwind
+gem 'administrate_tailwind_theme'

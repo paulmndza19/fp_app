@@ -1,0 +1,70 @@
+<header class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
+  <div class="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
+    <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
+      <!-- Hamburger Toggle BTN -->
+      <button class="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden" @click.stop="sidebarToggle = !sidebarToggle">
+        <span class="relative block h-5.5 w-5.5 cursor-pointer">
+          <span class="du-block absolute right-0 h-full w-full">
+            <span class="relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white !w-full delay-300" :class="{ '!w-full delay-300': !sidebarToggle }"></span>
+            <span class="relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white !w-full delay-400" :class="{ '!w-full delay-400': !sidebarToggle }"></span>
+            <span class="relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white !w-full delay-500" :class="{ '!w-full delay-500': !sidebarToggle }"></span>
+          </span>
+          <span class="du-block absolute right-0 h-full w-full rotate-45">
+            <span class="absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white !h-0 delay-[0]" :class="{ '!h-0 delay-[0]': !sidebarToggle }"></span>
+            <span class="delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white !h-0 dealy-200" :class="{ '!h-0 dealy-200': !sidebarToggle }"></span>
+          </span>
+        </span>
+      </button>
+      <!-- Hamburger Toggle BTN -->
+      <a class="block flex-shrink-0 lg:hidden" href="index.html">
+        <img src="src/images/logo/logo-icon.svg" alt="Logo">
+      </a>
+    </div>
+    <div class="hidden sm:block">
+      <% unless @current_user %>
+        <%= image_tag "icon.png", class: "h-16" %> 
+      <% else %>
+        <span class="hidden text-right lg:block">
+            <span class="block text-sm text-xl font-medium text-black dark:text-white">FP Access</span>
+        </span>
+      <% end %>
+    </div>
+
+    <div class="flex items-center gap-3 2xsm:gap-7">
+      
+      <% if @current_user %>
+        <% if params[:admin] %>
+          <a href="/" class="p-4 rounded block mt-4 lg:inline-block text-black hover:bg-black hover:text-bodydark1 lg:mt-0 hover:text-white mr-4">
+              <span class="hidden text-right lg:block">
+                  <span class="block text-sm font-medium dark:text-white">Back to App</span>
+              </span>
+          </a>
+        <% else %>
+          <% if @current_user.is_admin? %>
+            <a href="/admin" class="p-4 rounded block mt-4 lg:inline-block text-black hover:bg-black hover:text-bodydark1 lg:mt-0 hover:text-white mr-4">
+                <span class="hidden text-right lg:block">
+                    <span class="block text-sm font-medium dark:text-white">Admin Portal</span>
+                </span>
+            </a>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <!-- User Area -->
+      <div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
+        <% if user_signed_in? %>
+            <%= button_to "Sign out", destroy_user_session_path, class: "p-4 rounded block hover:bg-black hover:text-bodydark1 text-sm font-medium text-black dark:text-white", :method => :delete %>
+        <% else %>
+            <a href="<%= new_user_session_path %>" class="p-4 rounded block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
+                <span class="hidden text-right lg:block">
+                    <span class="block text-sm font-medium text-black dark:text-white">Sign In</span>
+                </span>
+            </a>
+        <% end %>
+        <a class="flex items-center gap-4" href="#" @click.prevent="dropdownOpen = ! dropdownOpen">
+        </a>
+      </div>
+      <!-- User Area -->
+    </div>
+  </div>
+</header>

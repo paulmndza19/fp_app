@@ -85,6 +85,11 @@ GEM
       kaminari (~> 1.2.2)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    administrate_tailwind_theme (0.0.5)
+      administrate (~> 0.15)
+      iso_country_codes (~> 0.7.8)
+      rails (~> 7.1, >= 7.1.3)
+      tailwindcss-rails (~> 2.0)
     autoprefixer-rails (10.4.16.0)
       execjs (~> 2)
     base64 (0.2.0)
@@ -137,6 +142,7 @@ GEM
     irb (1.12.0)
       rdoc
       reline (>= 0.4.2)
+    iso_country_codes (0.7.8)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -310,6 +316,7 @@ PLATFORMS
 
 DEPENDENCIES
   administrate
+  administrate_tailwind_theme
   bootsnap
   bootstrap (~> 5.1.3)
   capybara
