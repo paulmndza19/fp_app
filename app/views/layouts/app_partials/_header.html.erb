@@ -25,7 +25,9 @@
         <%= image_tag "icon.png", class: "h-16" %> 
       <% else %>
         <span class="hidden text-right lg:block">
-            <span class="block text-sm text-xl font-medium text-black dark:text-white">FP Access</span>
+            <span class="block text-sm text-xl font-medium text-black dark:text-white">
+              <%= params[:admin] ? 'FP Admin' : 'FP Access' %>
+            </span>
         </span>
       <% end %>
     </div>
