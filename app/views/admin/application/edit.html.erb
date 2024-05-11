@@ -1,0 +1,34 @@
+<%#
+# Edit
+
+This view is the template for the edit page.
+
+It displays a header, and renders the `_form` partial to do the heavy lifting.
+
+## Local variables:
+
+- `page`:
+  An instance of [Administrate::Page::Form][1].
+  Contains helper methods to help display a form,
+  and knows which attributes should be displayed in the resource's form.
+
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Form
+%>
+
+<% content_for(:title) { t("administrate.actions.edit_resource", name: page.page_title) } %>
+
+<header class="main-content__header">
+  
+</header>
+
+<div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+  <div class="border-b border-stroke px-6.5 py-4 dark:border-strokedark flex justify-between">
+    <h3 class="font-medium text-black dark:text-white py-1">
+      <%= content_for(:title) %>
+    </h3>
+    <%= link_to 'Cancel', :back, class: "py-1 px-3 button bg-danger text-white rounded" %>
+  </div>
+  <section class="main-content__body px-6.5 py-6">
+    <%= render "form", page: page %>
+  </section>
+</div>
