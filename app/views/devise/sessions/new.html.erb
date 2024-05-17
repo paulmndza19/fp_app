@@ -2,27 +2,32 @@
   <div class="flex flex-wrap items-center">
     <div class="hidden w-full xl:block xl:w-1/2">
       <div class="px-26 py-17.5 text-center">
-        <a class="mb-5.5 inline-block" href="index.html">
+        <a class="mb-5.5 inline-block" href="/">
           <%= image_tag "logo.png", class: "max-w-52" %>
         </a>
-
         <p class="font-medium 2xl:px-20">
           A Web-Based Association Management System for the Faculty and Personnel Association of Laguna State Polytechnic University Santa Cruz Campus
         </p>
-        
       </div>
     </div>
     <div class="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
       <div class="w-full p-4 sm:p-12.5 xl:p-17.5">
         <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-          Sign In to FP App
+          Sign In to FPAccess
         </h2>
+
+        <!-- Display flash messages -->
+        <% if flash[:alert] %>
+          <div id="flash-message" class="mb-4 rounded border border-red-500 bg-red-100 p-4 text-red-700">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "p-12 md:p-24" }, data: { turbo: false }) do |f| %>
           <div class="mb-4">
             <label class="mb-2.5 block font-medium text-black dark:text-white">Email</label>
             <div class="relative">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary", placeholder: "Email"  %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary", placeholder: "Email" %>
               <span class="absolute right-4 top-4">
                 <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g opacity="0.5">
@@ -31,13 +36,17 @@
                 </svg>
               </span>
             </div>
+            <% if resource.errors[:email].any? %>
+              <div class="text-red-500 text-sm">
+                <%= resource.errors[:email].first %>
+              </div>
+            <% end %>
           </div>
 
           <div class="mb-6">
             <label class="mb-2.5 block font-medium text-black dark:text-white">Password</label>
             <div class="relative">
               <%= f.password_field :password, autocomplete: "current-password", class:"w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary", placeholder: "Password" %>
-
               <span class="absolute right-4 top-4">
                 <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g opacity="0.5">
@@ -47,6 +56,11 @@
                 </svg>
               </span>
             </div>
+            <% if resource.errors[:password].any? %>
+              <div class="text-red-500 text-sm">
+                <%= resource.errors[:password].first %>
+              </div>
+            <% end %>
           </div>
 
           <div class="mb-5">
@@ -57,3 +71,16 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const flashMessage = document.getElementById("flash-message");
+    if (flashMessage) {
+      setTimeout(() => {
+        flashMessage.style.transition = "opacity 1s";
+        flashMessage.style.opacity = "0";
+        setTimeout(() => flashMessage.remove(), 1000); // Remove element after fade out
+      }, 3000); // Display message for 3 seconds
+    }
+  });
+</script>

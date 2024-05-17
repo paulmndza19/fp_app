@@ -10,7 +10,7 @@ class Contribution < ApplicationRecord
 
   belongs_to :user
 
-  RECEIPT_NUMBER_LENGTH = 6
+  RECEIPT_NUMBER_LENGTH = 3
 
   def created_by
     return if versions.blank?
@@ -35,16 +35,19 @@ class Contribution < ApplicationRecord
   private
 
   def set_receipt_number
-    latest_receipt_number_length = latest_receipt_number.nil? ? 1 : latest_receipt_number.length
-
-    self.receipt_number = "#{'0' * (RECEIPT_NUMBER_LENGTH - latest_receipt_number_length)}#{latest_receipt_number.to_i + 1}"
+    latest_receipt_number_length = latest_receipt_number.nil? ? 1 : latest_receipt_number.to_s.length
+    current_date = Time.zone.now
+    current_month = current_date.strftime("%-m")
+    current_day = current_date.strftime("%d")
+    current_year = current_date.strftime("%Y")
+    self.receipt_number = "#{current_month}#{current_day}#{current_year}-#{'0' * (RECEIPT_NUMBER_LENGTH - latest_receipt_number_length)}#{latest_receipt_number + 1}"
   end
 
   def latest_receipt_number
-    latest_contribution = Contribution.order(created_at: :desc).limit(1).first
+    latest_contribution = Contribution.where(created_at: Time.zone.now.all_day).order(created_at: :desc).limit(1).first
 
-    return if latest_contribution.nil?
+    return 0 if latest_contribution.nil?
 
-    latest_contribution.receipt_number.delete('0')
+    latest_contribution.receipt_number.split("-").last.to_i
   end
 end

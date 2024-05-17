@@ -1,0 +1,144 @@
+<div class="flex flex-col gap-2">
+  <!-- ===== First Row Start ===== -->
+  <div class="flex justify-left align-center mt-12">
+    <% if @current_user.is_admin? %>
+      <!-- ===== User Count Start ===== -->
+      <div class="max-w-sm flex gap-2 rounded overflow-hidden shadow-lg bg-white mx-6">
+        <div class="py-4 px-6">
+          <div class="bg-blue-100 p-4 shadow-sm w-16 h-16 rounded-full">
+            <div class="flex justify-center">
+              <div class="text-2xl text-white">
+                👤
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pr-10 py-4">
+          <div class=" mb-2 text-gray-500">Total Users</div>
+          <div class="flex justify-center">
+            <p class="text-gray-700 text-base font-bold text-xl">
+              <%= number_to_currency(@user_count, unit: "", locale: :en, precision: 0) %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- ===== User Count End ===== -->
+      <div class="flex max-w-sm rounded overflow-hidden shadow-lg bg-white mx-6">
+        <div class="py-4 px-6">
+          <div class="bg-meta-900 p-4 shadow-sm w-16 h-16 rounded-full">
+            <div class="flex justify-center">
+              <div class="text-2xl text-white">🏛️</div>
+            </div>
+          </div>
+        </div>
+        <div class="px-6 py-4">
+          <div class=" mb-2 text-gray-500">Total Contributions</div>
+          <p class="text-gray-700 text-base font-bold text-xl">
+            <%= number_to_currency(@total_contributions, unit: "₱") %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white mx-6">
+      <div class="py-4 px-6">
+        <div class="bg-success p-4 shadow-sm w-16 h-16 rounded-full">
+          <div class="flex justify-center">
+            <div class="text-2xl text-white">₱</div>
+          </div>
+        </div>
+      </div>
+      <div class="px-6 py-4">
+        <div class=" mb-2 text-gray-500">Your Total Contributions</div>
+        <p class="text-gray-700 text-base font-bold text-xl">
+          <%= number_to_currency(@your_total_contributions, unit: "₱") %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- ===== First Row End ===== -->
+
+  <!-- ===== Second Row Start ===== -->
+  <div class="flex justify-left align-center mt-12">
+    <% if @current_user.is_admin? %>
+      <div class="flex w-full rounded overflow-hidden shadow-lg bg-white mx-6">
+        <div class=" w-full">
+          <div class="px-6 py-4 bg-success text-xl font-semibold mb-2 py-2 text-white border-b"> 
+            <span class="mr-2"> 🏦 </span>
+            Latest Contributions 
+          </div>
+          <table class="min-w-full leading-normal">
+            <thead>
+              <tr>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  Contributor
+                </th>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  Month
+                </th>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  Year
+                </th>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  Amount
+                </th>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  Paid At
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @contributions.each do |contribution| %>
+                <tr>
+                  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <div class="flex">
+                      <div class="ml-3">
+                        <p class="text-gray-900 whitespace-no-wrap">
+                          <%= contribution.user.name %>
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <div class="flex">
+                      <div class="ml-3">
+                        <p class="text-gray-900 whitespace-no-wrap">
+                          <%= contribution.month %>
+                        </p>
+                        <p class="text-gray-600 whitespace-no-wrap"><%= contribution.receipt_number %></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p class="text-gray-900 whitespace-no-wrap"><%= contribution.year %></p>
+                  </td>
+                  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      <%= number_to_currency(contribution.amount, unit: "₱") %>
+                    </p>
+                  </td>
+                  <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      <%= contribution.created_at.strftime('%Y-%m-%d') %>
+                    </p>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <!-- ===== Second Row End ===== -->
+</div>

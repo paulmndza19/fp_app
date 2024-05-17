@@ -1,0 +1,9 @@
+--2024-05-07 13:46:17--  https://update.code.visualstudio.com/commit:b58957e67ee1e712cebf466b995adf4c5307b2bd/server-linux-legacy-x64/stable
+Resolving update.code.visualstudio.com (update.code.visualstudio.com)... 13.107.246.73, 13.107.213.73, 2620:1ec:bdf::73, ...
+Connecting to update.code.visualstudio.com (update.code.visualstudio.com)|13.107.246.73|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://vscode.download.prss.microsoft.com/dbazure/download/stable/b58957e67ee1e712cebf466b995adf4c5307b2bd/vscode-server-linux-legacy-x64.tar.gz [following]
+--2024-05-07 13:46:18--  https://vscode.download.prss.microsoft.com/dbazure/download/stable/b58957e67ee1e712cebf466b995adf4c5307b2bd/vscode-server-linux-legacy-x64.tar.gz
+Resolving vscode.download.prss.microsoft.com (vscode.download.prss.microsoft.com)... 152.199.39.108, 2606:2800:247:1cb7:261b:1f9c:2074:3c
+Connecting to vscode.download.prss.microsoft.com (vscode.download.prss.microsoft.com)|152.199.39.108|:443... failed: Connection timed out.
+Connecting to vscode.download.prss.microsoft.com (vscode.download.prss.microsoft.com)|2606:2800:247:1cb7:261b:1f9c:2074:3c|:443... failed: Network is unreachable.

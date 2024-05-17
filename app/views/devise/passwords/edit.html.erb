@@ -1,7 +1,7 @@
 <div class="flex flex-grow justify-center items-center mt-14">
   <div class="rounded overflow-hidden shadow-lg bg-white mx-6 p-4 w-1/2">
   
-    <h2 class="text-xl font-semibold text-gray-800">Change your password</h2>
+    <h2 class="text-xl font-semibold text-gray-800">Create your password</h2>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="mb-3 flex items-center justify-center">
-          <%= f.submit "Change my password", class:"bg-blue-600 text-white px-6 py-3 rounded-md" %>
+          <%= f.submit "Create my password", class:"bg-blue-600 text-white px-6 py-3 rounded-md" %>
       </div>
     <% end %>
   </div>
