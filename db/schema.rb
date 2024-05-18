@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_110949) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_18_073335) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,12 +48,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_110949) do
     t.index ["user_id"], name: "index_contributions_on_user_id"
   end
 
+  create_table "daily_sales", force: :cascade do |t|
+    t.bigint "sales_category_id", null: false
+    t.decimal "amount"
+    t.date "sales_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sales_category_id"], name: "index_daily_sales_on_sales_category_id"
+  end
+
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["name"], name: "index_roles_on_name", unique: true
+  end
+
+  create_table "sales_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -103,5 +118,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_110949) do
   add_foreign_key "claim_requests", "claim_request_types"
   add_foreign_key "claim_requests", "users"
   add_foreign_key "contributions", "users"
+  add_foreign_key "daily_sales", "sales_categories"
   add_foreign_key "users", "roles"
 end

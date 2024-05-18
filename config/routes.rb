@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       update
       show
     ]
+    resources :sales_categories
+    resources :daily_sales, except: %i[destroy]
 
     root to: "contributions#index"
   end
