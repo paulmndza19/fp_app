@@ -63,7 +63,7 @@ class DailySaleDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how daily sales are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(daily_sale)
-  #   "DailySale ##{daily_sale.id}"
-  # end
+  def display_resource(daily_sale)
+    "#{daily_sale.sales_category.name} sale for #{daily_sale.sales_date.strftime('%B %d, %Y')}"
+  end
 end
