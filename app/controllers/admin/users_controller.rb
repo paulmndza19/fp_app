@@ -63,10 +63,6 @@ module Admin
       )
     end
 
-    def show
-      @person = Person.find(params[:id])
-    end
-
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
   end

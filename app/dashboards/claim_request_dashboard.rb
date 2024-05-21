@@ -15,6 +15,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
     user: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    document: Field::ActiveStorage.with_options(index_display_preview: false),
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,6 +27,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
     user
     claim_request_type
     status
+    document
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -37,6 +39,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
     status
     created_at
     updated_at
+    document
   ].freeze
 
   # FORM_ATTRIBUTES

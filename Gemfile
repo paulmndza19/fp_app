@@ -89,3 +89,7 @@ gem "paper_trail"
 gem "paranoia", "~> 2.2"
 # Adminstrate Tailwind
 gem 'administrate_tailwind_theme'
+# Adminstrate Active Storage Field
+gem "administrate-field-active_storage"
+# Image Processing
+gem "image_processing"

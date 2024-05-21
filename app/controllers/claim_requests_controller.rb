@@ -65,6 +65,6 @@ class ClaimRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def claim_request_params
-      params.require(:claim_request).permit(:user_id, :claim_request_type_id)
+      params.require(:claim_request).permit(:user_id, :claim_request_type_id, :document)
     end
 end

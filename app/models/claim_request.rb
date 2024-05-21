@@ -4,4 +4,6 @@ class ClaimRequest < ApplicationRecord
 
   has_paper_trail
   acts_as_paranoid
+
+  has_one_attached :document
 end
