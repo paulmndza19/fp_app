@@ -22,6 +22,7 @@ class ClaimRequestsController < ApplicationController
   # POST /claim_requests or /claim_requests.json
   def create
     @claim_request = ClaimRequest.new(claim_request_params)
+    @claim_request.document.attach(claim_request_params[:document])
 
     respond_to do |format|
       if @claim_request.save
