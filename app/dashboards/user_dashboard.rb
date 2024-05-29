@@ -10,6 +10,7 @@ class UserDashboard < Administrate::BaseDashboard
   #
 
   ATTRIBUTE_TYPES = {
+    member_id_number: Field::String,
     id: Field::String,
     birthday: Field::Date,
     confirmation_sent_at: Field::DateTime,
@@ -44,6 +45,7 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
+    member_id_number
     first_name
     last_name
     email

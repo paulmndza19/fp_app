@@ -24,8 +24,17 @@ as well as a link to its edit page.
     <h3 class="font-medium text-black dark:text-white py-1">
       <%= content_for(:title) %>
     </h3>
-    
+
     <div class="flex flex-row gap-4">
+      <% if accessible_action?(page.resource, :new) %>
+        <%= link_to([:new, namespace, page.resource], class: "button bg-primary flex cursor-pointer items-center justify-center gap-2 rounded px-2 py-1 text-base font-medium text-white hover:bg-opacity-80 xsm:px-4") do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          Create another
+        <% end %>
+      <% end %>
+
       <% if accessible_action?(page.resource, :edit) %>
         <%= link_to([:edit, namespace, page.resource], class: "button bg-success flex cursor-pointer items-center justify-center gap-2 rounded px-2 py-1 text-base font-medium text-white hover:bg-opacity-80 xsm:px-4") do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

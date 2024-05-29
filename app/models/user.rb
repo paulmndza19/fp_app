@@ -11,6 +11,12 @@ class User < ApplicationRecord
   has_many :contributions
   has_many :claim_requests
 
+  before_validation :set_member_id
+
+  validates :member_id_number, uniqueness: true
+
+  MEMBER_ID_NUMBER_LENGTH = 3
+  
   def name
     "#{first_name} #{last_name}"
   end
@@ -18,4 +24,25 @@ class User < ApplicationRecord
   def is_admin?
     role.name.downcase == 'admin'
   end
-end
+
+  def is_member?
+    role.name.downcase == 'member'
+  end
+
+  private 
+
+  def set_member_id
+    latest_member_id_length = latest_member_id.nil? ? 1 : latest_member_id.to_s.length
+    current_date = Time.zone.now
+    current_year = current_date.strftime("%y")
+    self.member_id_number = "01#{current_year}-#{'0' * (MEMBER_ID_NUMBER_LENGTH - latest_member_id_length)}#{latest_member_id + 1}"
+  end
+
+  def latest_member_id
+    latest_user = User.where(created_at: Time.zone.now.all_day).order(created_at: :desc).limit(1).first
+
+    return 0 if latest_user.nil?
+
+    latest_user.member_id_number.split("-").last.to_i
+  end
+end 
