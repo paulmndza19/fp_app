@@ -94,4 +94,6 @@ gem "administrate-field-active_storage"
 # Image Processing
 gem "image_processing"
 # Attachment Validations
-gem "active_storage_validations"
+gem "active_storage_validations"\
+
+gem 'dotenv'

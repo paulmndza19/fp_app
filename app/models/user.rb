@@ -39,7 +39,7 @@ class User < ApplicationRecord
   end
 
   def latest_member_id
-    latest_user = User.where(created_at: Time.zone.now.all_day).order(created_at: :desc).limit(1).first
+    latest_user = User.order(created_at: :desc).limit(1).first
 
     return 0 if latest_user.nil?
 
