@@ -192,7 +192,7 @@
       <div class="px-6 py-4">
         <div class=" mb-2 text-gray-500 text-sm">Last Posted Contribution</div>
         <p class="text-gray-700 text-base font-bold text-xl">
-          <%= "#{@your_last_contribution&.month} #{@your_last_contribution&.year}" %>
+          <%= @your_last_contribution ? "#{@your_last_contribution.month} #{@your_last_contribution.year}" : "N/A" %>
         </p>
       </div>
     </div>
