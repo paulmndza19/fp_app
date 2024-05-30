@@ -9,7 +9,7 @@ class DailySaleDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    amount: Field::String.with_options(searchable: false),
+    amount: Field::String.with_options(searchable: true),
     sales_category: Field::BelongsTo,
     sales_date: Field::Date,
     created_at: Field::DateTime,
@@ -64,6 +64,6 @@ class DailySaleDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(daily_sale)
-    "#{daily_sale.sales_category.name} sale for #{daily_sale.sales_date.strftime('%B %d, %Y')}"
+    "#{daily_sale.sales_category.name} for #{daily_sale.sales_date.strftime('%B %d, %Y')}"
   end
 end

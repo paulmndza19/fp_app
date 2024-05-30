@@ -1,45 +1,10 @@
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-4">
   <!-- ===== First Row Start ===== -->
-  <div class="flex justify-left align-center mt-12">
+  <div class="flex justify-between space-x-6 mx-6 mt-12">
     <% if @current_user.is_admin? %>
-      <!-- ===== User Count Start ===== -->
-      <div class="max-w-sm flex gap-2 rounded overflow-hidden shadow-lg bg-white mx-6">
-        <div class="py-4 px-6">
-          <div class="bg-blue-100 p-4 shadow-sm w-16 h-16 rounded-full">
-            <div class="flex justify-center">
-              <div class="text-2xl text-white">
-                👤
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="pr-10 py-4">
-          <div class=" mb-2 text-gray-500">Total Users</div>
-          <div class="flex justify-center">
-            <p class="text-gray-700 text-base font-bold text-xl">
-              <%= number_to_currency(@user_count, unit: "", locale: :en, precision: 0) %>
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- ===== User Count End ===== -->
-      <div class="flex max-w-sm rounded overflow-hidden shadow-lg bg-white mx-6">
-        <div class="py-4 px-6">
-          <div class="bg-meta-900 p-4 shadow-sm w-16 h-16 rounded-full">
-            <div class="flex justify-center">
-              <div class="text-2xl text-white">🏛️</div>
-            </div>
-          </div>
-        </div>
-        <div class="px-6 py-4">
-          <div class=" mb-2 text-gray-500">Total Contributions</div>
-          <p class="text-gray-700 text-base font-bold text-xl">
-            <%= number_to_currency(@total_contributions, unit: "₱") %>
-          </p>
-        </div>
-      </div>
-
-      <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white mx-6">
+  <div class="parent-container">
+      <!-- ===== Your Total Contributions Start ===== -->
+      <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
         <div class="py-4 px-6">
           <div class="bg-success p-4 shadow-sm w-16 h-16 rounded-full">
             <div class="flex justify-center">
@@ -48,13 +13,129 @@
           </div>
         </div>
         <div class="px-6 py-4">
-          <div class=" mb-2 text-gray-500">Your Total Contributions</div>
+          <div class="mb-2 text-gray-500 text-sm">Your Total Contributions</div>
           <p class="text-gray-700 text-base font-bold text-xl">
             <%= number_to_currency(@your_total_contributions, unit: "₱") %>
           </p>
         </div>
       </div>
+      </div>
+      <!-- ===== Your Total Contributions End ===== -->
+
+      <!-- ===== Your Number of Contributions Start ===== -->
+      <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
+        <div class="py-4 px-6">
+          <div class="bg-success p-4 shadow-sm w-16 h-16 rounded-full">
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-6">
+                <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="px-6 py-4">
+          <div class="mb-2 text-gray-500 text-sm">Your Number of Contributions</div>
+          <p class="text-gray-700 text-base font-bold text-xl">
+            <%= number_to_currency(@your_contributions_count, unit: "", locale: :en, precision: 0) %>
+          </p>
+        </div>
+      </div>
+      <!-- ===== Your Number of Contributions End ===== -->
+
+      <!-- ===== Last Posted Contribution Start ===== -->
+      <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
+        <div class="py-4 px-6">
+          <div class="bg-success p-4 shadow-sm w-16 h-16 rounded-full">
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-6">
+                <path d="M12.75 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM7.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM8.25 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM9.75 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM10.5 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM12.75 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM14.25 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" />
+                <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="px-6 py-4">
+          <div class="mb-2 text-gray-500 text-sm">Last Posted Contributionㅤㅤ</div>
+          <p class="text-gray-700 text-base font-bold text-xl">
+            <%= @your_last_contribution ? "#{@your_last_contribution.month} #{@your_last_contribution.year}" : "N/A" %>
+          </p>
+        </div>
+      </div>
     </div>
+    <!-- ===== Last Posted Contribution End ===== -->
+    </div>
+    <!-- ===== First Row End ===== -->
+
+
+    <!-- ===== 2nd Row Start ===== -->
+    <div class="flex justify-between space-x-6 mx-6 mt-12">
+    
+    <div class="parent-container">
+    <!-- ===== User Count Start ===== -->
+      <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
+        <div class="py-4 px-6">
+          <div class="bg-blue-100 p-4 shadow-sm w-16 h-16 rounded-full">
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="size-6">
+                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="px-6 py-4">
+          <div class="mb-2 text-gray-500 text-sm">Total Usersㅤㅤㅤㅤㅤㅤ</div>
+          <p class="text-gray-700 text-base font-bold text-xl">
+              <%= number_to_currency(@user_count, unit: "", locale: :en, precision: 0) %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <!-- ===== User Count End ===== -->
+
+    <!-- ===== Total Contributions Start ===== -->
+      <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
+        <div class="py-4 px-6">
+          <div class="bg-blue-100 p-4 shadow-sm w-16 h-16 rounded-full">
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="size-6">
+                <path d="M11.584 2.376a.75.75 0 0 1 .832 0l9 6a.75.75 0 1 1-.832 1.248L12 3.901 3.416 9.624a.75.75 0 0 1-.832-1.248l9-6Z" />
+                <path fill-rule="evenodd" d="M20.25 10.332v9.918H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h.75v-9.918a.75.75 0 0 1 .634-.74A49.109 49.109 0 0 1 12 9c2.59 0 5.134.202 7.616.592a.75.75 0 0 1 .634.74Zm-7.5 2.418a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Zm3-.75a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 1-1.5 0v-6.75a.75.75 0 0 1 .75-.75ZM9 12.75a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Z" clip-rule="evenodd" />
+                <path d="M12 7.875a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="px-6 py-4">
+          <div class="mb-2 text-gray-500 text-sm">Total Contributionsㅤㅤㅤㅤㅤ</div>
+          <p class="text-gray-700 text-base font-bold text-xl">
+            <%= number_to_currency(@total_contributions, unit: "₱") %>
+          </p>
+        </div>
+      </div>
+    <!-- ===== Total Contributions End ===== -->
+
+    <!-- ===== Total Number of Contributions Start ===== -->
+      <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
+        <div class="py-4 px-6">
+          <div class="bg-blue-100 p-4 shadow-sm w-16 h-16 rounded-full flex justify-center items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="size-6">
+              <path d="M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875Z" />
+              <path d="M12 12.75c2.685 0 5.19-.586 7.078-1.609a8.283 8.283 0 0 0 1.897-1.384c.016.121.025.244.025.368C21 12.817 16.97 15 12 15s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.285 8.285 0 0 0 1.897 1.384C6.809 12.164 9.315 12.75 12 12.75Z" />
+              <path d="M12 16.5c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 0 0 1.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 0 0 1.897 1.384C6.809 15.914 9.315 16.5 12 16.5Z" />
+              <path d="M12 20.25c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 0 0 1.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 0 0 1.897 1.384C6.809 19.664 9.315 20.25 12 20.25Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="px-6 py-4">
+          <div class="mb-2 text-gray-500 text-sm">Total Number of Contributions</div>
+          <p class="text-gray-700 text-xl font-bold">
+            <%= number_to_currency(@total_number_contributions, unit: "", locale: :en, precision: 0) %>
+          </p>
+        </div>
+      </div>
+    <!-- ===== Total Number of Contributions End ===== -->
+    </div>
+    <!-- ===== 2nd Row End ===== -->
     <% end %>
 
   <% if @current_user.is_member? %>
@@ -68,7 +149,7 @@
         </div>
       </div>
       <div class="px-6 py-4">
-        <div class=" mb-2 text-gray-500">Your Total Contributions</div>
+        <div class=" mb-2 text-gray-500 text-sm">Your Total Contributions</div>
         <p class="text-gray-700 text-base font-bold text-xl">
           <%= number_to_currency(@your_total_contributions, unit: "₱") %>
         </p>
@@ -88,7 +169,7 @@
         </div>
       </div>
       <div class="px-6 py-4">
-        <div class=" mb-2 text-gray-500">Number of Contributions</div>
+        <div class=" mb-2 text-gray-500 text-sm">Your Number of Contributions</div>
         <p class="text-gray-700 text-base font-bold text-xl">
           <%= number_to_currency(@your_contributions_count, unit: "", locale: :en, precision: 0) %>
         </p>
@@ -105,14 +186,13 @@
               <path d="M12.75 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM7.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM8.25 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM9.75 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM10.5 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM12.75 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM14.25 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" />
               <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd" />
             </svg>
-
           </div>
         </div>
       </div>
       <div class="px-6 py-4">
-        <div class=" mb-2 text-gray-500">Last Posted Contribution</div>
+        <div class=" mb-2 text-gray-500 text-sm">Last Posted Contribution</div>
         <p class="text-gray-700 text-base font-bold text-xl">
-          <%= "#{@your_last_contribution.month} #{@your_last_contribution.year}" %>
+          <%= "#{@your_last_contribution&.month} #{@your_last_contribution&.year}" %>
         </p>
       </div>
     </div>
@@ -125,7 +205,7 @@
     <% if @current_user.is_admin? %>
       <div class="flex w-full rounded overflow-hidden shadow-lg bg-white mx-6">
         <div class=" w-full">
-          <div class="px-6 py-4 bg-success text-xl font-semibold mb-2 py-2 text-white border-b"> 
+          <div class="px-6 py-4 bg-blue-100 text-xl font-semibold mb-2 py-2 text-black border-b"> 
             <span class="mr-2"> 🏦 </span>
             Latest Contributions 
           </div>

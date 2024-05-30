@@ -22,6 +22,7 @@ class HomeController < ApplicationController
     @contributions = Contribution.includes(:user).order(created_at: :desc).limit(5)
     @user_count = User.count
     @total_contributions = Contribution.sum(:amount)
+    @total_number_contributions = Contribution.count
     @your_contributions_count = current_user.contributions.count(:amount)
     @your_total_contributions = current_user.contributions.sum(:amount)
 
