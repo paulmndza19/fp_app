@@ -6,7 +6,7 @@ databases:
 
 services:
   - type: web
-    name: fpaccess_services
+    name: fpaccess
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
