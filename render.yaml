@@ -1,6 +1,6 @@
 databases:
   - name: fpaccess
-    databaseName: fpaccess
+    databaseName: fp_app_development
     user: carls
     plan: free
 
