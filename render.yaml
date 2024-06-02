@@ -1,8 +1,7 @@
 databases:
-  - name: fp_app_development
-    databaseName: fpaccess
-    user: carls
-    plan: free
+  - name: fp-access-production
+    databaseName: fp_access_production
+    user: fp_access_admin
 
 services:
   - type: web
@@ -15,7 +14,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: fp_app_development
+          name: fp-access-production
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false

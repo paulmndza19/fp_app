@@ -22,4 +22,5 @@ test:
 
 production:
   <<: *default
-  database: fp_app
+  database: fp_access_production
+  user: fp_access_admin
