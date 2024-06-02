@@ -23,4 +23,7 @@ test:
 production:
   <<: *default
   database: fp_access_production
-  user: fp_access_admin
+  user: ENV.fetch("DB_USER")
+  host: ENV.fetch("DB_HOSTNAME")
+  password: ENV.fetch("DB_PASSWORD")
+  port: 5432
