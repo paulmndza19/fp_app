@@ -57,7 +57,7 @@
         <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <a href="#home" class="flex items-center">
-                    <img src="assets/logoheader.jpg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+                    <%= image_tag "logoheader.jpg", class: "mr-3 h-6 sm:h-9", alt: "Flowbite Logo" %>
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">FPAccess</span>
                 </a>
                 <div class="flex items-center lg:order-2">
@@ -92,7 +92,7 @@
     </header>
     
 
-    <section id="home" class="bg-white" style="display: flex; justify-content: center; padding-top: 16.5rem; padding-bottom: 16.5rem; background-image: url('assets/LSPU.png'); background-size: cover; background-position: center;">
+    <section id="home" class="bg-white" style="display: flex; justify-content: center; padding-top: 16.5rem; padding-bottom: 16.5rem; background-image: url(<%= asset_path 'lspu.png' %>); background-size: cover; background-position: center;">
         <div class="grid max-w-screen-xl px-4 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12" style="margin-left: 0; margin-right: 0;">
             <div class="lg:col-span-6 flex flex-col justify-center items-center text-center text-white">
                 <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none md:text-5xl xl:text-8xl text-black">Welcome to FPAccess</h1>
@@ -118,7 +118,7 @@
                 <p class="mb-4 font-medium">LSPU delivers quality education through responsive instruction, distinctive research, sustainable extension and production service. Thus, we are committed with continual improvement to meet applicable requirements to provide quality, efficient and effective services to the university stakeholder's highest level of satisfaction through an excellent management system imbued with utmost integrity, professionalism and innovation.</p>
             </div>
             <div class="">
-                <img class="w-full rounded-lg" src="assets/logo2.png" alt="office content 1">
+                <%= image_tag "logo2.png", class: "w-full rounded-lg", alt: "office content 1"%>
             </div>
         </div>
     </section>
@@ -193,7 +193,7 @@
             <div class="flex flex-wrap -mx-4">
                 <div class="w-full md:w-1/3 px-4 mb-8">
                     <div class="bg-white rounded-lg shadow-lg p-8 mb-8 flex flex-col items-center">
-                        <img src="assets/fpapresident.jpg" class="mx-auto mb-4 rounded-lg h-64 w-48 object-cover" alt="Samuel Grecalda">
+                        <%= image_tag "fpapresident.jpg", class: "mx-auto mb-4 rounded-lg h-64 w-48 object-cover", alt: "Samuel Grecalda" %>
                         <div class="text-center">
                             <h2 class="text-xl font-bold">Dr. Ray Samuel G. Grecalda</h2>
                             <small class="block mb-4">President</small>
@@ -204,7 +204,7 @@
 
                 <div class="w-full md:w-1/3 px-4 mb-8">
                     <div class="bg-white rounded-lg shadow-lg p-8 mb-8 flex flex-col items-center">
-                        <img src="assets/fpatreasurernew.jpg" class="mx-auto mb-4 rounded-lg h-64 w-48 object-cover" alt="Mia V. Villarica">
+                        <%= image_tag "fpatreasurernew.jpg", class: "mx-auto mb-4 rounded-lg h-64 w-48 object-cover", alt: "Mia V. Villarica" %>
                         <div class="text-center">
                             <h2 class="text-xl font-bold">Mia V. Villarica, DIT</h2>
                             <small class="block mb-4">Treasurer</small>
@@ -215,7 +215,7 @@
 
                 <div class="w-full md:w-1/3 px-4 mb-8">
                     <div class="bg-white rounded-lg shadow-lg p-8 mb-8 flex flex-col items-center">
-                        <img src="assets/fpasecretary.jpg" class="mx-auto mb-4 rounded-lg h-64 w-48 object-cover" alt="Ronald Maglapuz">
+                        <%= image_tag "fpasecretary.jpg", class: "mx-auto mb-4 rounded-lg h-64 w-48 object-cover", alt: "Ronald Maglapuz" %>
                         <div class="text-center">
                             <h2 class="text-xl font-bold">Jean Bernales Cabela</h2>
                             <small class="block mb-4">Secretary</small>
@@ -246,7 +246,7 @@
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <a href="#home" class="flex items-center">
-                        <img src="assets/logo2.png" class="mr-3 h-8" alt="" />
+                        <%= image_tag "logo2.png", class: "mr-3 h-8" %>
                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FPAccess</span>
                     </a>
                 </div>
