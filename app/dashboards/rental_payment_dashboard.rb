@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class DailySaleDashboard < Administrate::BaseDashboard
+class RentalPaymentDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -13,8 +13,7 @@ class DailySaleDashboard < Administrate::BaseDashboard
       prefix: "₱",
       decimals: 2,
     ),
-    sales_category: Field::BelongsTo,
-    sales_date: Field::Date,
+    stall_rental: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -27,8 +26,8 @@ class DailySaleDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     amount
-    sales_category
-    sales_date
+    stall_rental
+    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,8 +35,7 @@ class DailySaleDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     amount
-    sales_category
-    sales_date
+    stall_rental
     created_at
     updated_at
   ].freeze
@@ -47,8 +45,7 @@ class DailySaleDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     amount
-    sales_category
-    sales_date
+    stall_rental
   ].freeze
 
   # COLLECTION_FILTERS
@@ -63,10 +60,10 @@ class DailySaleDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how daily sales are displayed
+  # Overwrite this method to customize how rental payments are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(daily_sale)
-    "#{daily_sale.sales_category.name} for #{daily_sale.sales_date.strftime('%B %d, %Y')}"
+  def display_resource(rental_payment)
+    "Rental Payment #{rental_payment.stall_rental.display_name} - #{rental_payment.created_at.strftime('%B %Y')}"
   end
 end

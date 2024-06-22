@@ -348,6 +348,7 @@ DEPENDENCIES
   image_processing
   importmap-rails
   jbuilder
+  kaminari
   paper_trail
   paranoia (~> 2.2)
   pg

@@ -3,7 +3,7 @@ class ClaimRequestsController < ApplicationController
 
   # GET /claim_requests or /claim_requests.json
   def index
-    @claim_requests = current_user.claim_requests.includes(:user, :claim_request_type)
+    @claim_requests = current_user.claim_requests.includes(:user, :claim_request_type).page(params[:page])
   end
 
   # GET /claim_requests/1 or /claim_requests/1.json

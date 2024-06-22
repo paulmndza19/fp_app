@@ -97,3 +97,5 @@ gem "image_processing"
 gem "active_storage_validations"\
 
 gem 'dotenv'
+# Pagination
+gem 'kaminari'

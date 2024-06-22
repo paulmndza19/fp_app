@@ -1,4 +1,6 @@
 class Contribution < ApplicationRecord
+  paginates_per 10
+
   default_scope { order(created_at: :desc) }
 
   has_paper_trail
