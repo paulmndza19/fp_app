@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :daily_expenses, except: %i[destroy]
 
     resources :tenants
+    resources :late_tenants
     resources :stalls
     resources :stall_rentals
     resources :rental_payments
