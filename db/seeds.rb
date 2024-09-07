@@ -12,6 +12,9 @@ admin = Role.create(name: 'Admin')
 puts "Creating member role..."
 member = Role.create(name: 'Member')
 
+puts "Creating secretary role..."
+secretary = Role.create(name: 'Secretary')
+
 puts "Creating users..."
 User.create(
   email: "testuser@gmail.com",
@@ -20,6 +23,15 @@ User.create(
   password: "password",
   birthday: "12/12/2000",
   role_id: admin.id
+)
+
+User.create(
+  email: "testsec@gmail.com",
+  first_name: "Jean",
+  last_name: "Cabela",
+  password: "password",
+  birthday: "12/12/2000",
+  role_id: secretary.id
 )
 
 User.create(
@@ -377,13 +389,13 @@ SalesCategory.create(
 
     { name: "Transportation"},
 
-    { name: "Food Allowance"},
+    # { name: "Food Allowance"},
 
-    { name: "Medical/Retirement"},
+    # { name: "Medical/Retirement"},
 
-    { name: "Salary"},
+    # { name: "Salary"},
 
-    { name: "Misc/Repair"},
+    # { name: "Misc/Repair"},
 
     { name: "Cash Deposit"},
   ]

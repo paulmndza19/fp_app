@@ -22,6 +22,7 @@ class ContributionsController < ApplicationController
   # POST /contributions or /contributions.json
   def create
     @contribution = Contribution.new(contribution_params)
+    # @contribution.document.attach(contribution_params[:document])
 
     respond_to do |format|
       if @contribution.save

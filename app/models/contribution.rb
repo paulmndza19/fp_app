@@ -4,6 +4,10 @@ class Contribution < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
+  # has_one_attached :document
+
+  # validates :document, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+
   before_validation :set_receipt_number
 
   validates :receipt_number, uniqueness: true
