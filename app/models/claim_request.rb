@@ -1,4 +1,6 @@
 class ClaimRequest < ApplicationRecord
+  paginates_per 10
+
   belongs_to :user
   belongs_to :claim_request_type
 
