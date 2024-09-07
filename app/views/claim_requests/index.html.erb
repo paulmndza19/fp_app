@@ -112,6 +112,10 @@
             <% end %>
           </tbody>
         </table>
+
+        <div class="py-4">
+          <%= paginate @claim_requests, outer_window: 3, left: 1, right: 3 %>
+        </div>
       </div>
     </div>
   </div>

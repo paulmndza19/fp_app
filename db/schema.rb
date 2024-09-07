@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_17_062517) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_22_141555) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,6 +77,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_062517) do
     t.index ["user_id"], name: "index_contributions_on_user_id"
   end
 
+  create_table "daily_expenses", force: :cascade do |t|
+    t.bigint "expense_category_id", null: false
+    t.decimal "amount"
+    t.date "expense_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expense_category_id"], name: "index_daily_expenses_on_expense_category_id"
+  end
+
   create_table "daily_sales", force: :cascade do |t|
     t.bigint "sales_category_id", null: false
     t.decimal "amount"
@@ -84,6 +93,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_062517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sales_category_id"], name: "index_daily_sales_on_sales_category_id"
+  end
+
+  create_table "expense_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rental_payments", force: :cascade do |t|
+    t.bigint "stall_rental_id", null: false
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stall_rental_id"], name: "index_rental_payments_on_stall_rental_id"
   end
 
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -96,6 +119,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_062517) do
 
   create_table "sales_categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stall_rentals", force: :cascade do |t|
+    t.bigint "tenant_id", null: false
+    t.bigint "stall_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stall_id"], name: "index_stall_rentals_on_stall_id"
+    t.index ["tenant_id"], name: "index_stall_rentals_on_tenant_id"
+  end
+
+  create_table "stalls", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tenants", force: :cascade do |t|
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -150,6 +196,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_062517) do
   add_foreign_key "claim_requests", "claim_request_types"
   add_foreign_key "claim_requests", "users"
   add_foreign_key "contributions", "users"
+  add_foreign_key "daily_expenses", "expense_categories"
   add_foreign_key "daily_sales", "sales_categories"
+  add_foreign_key "rental_payments", "stall_rentals"
+  add_foreign_key "stall_rentals", "stalls"
+  add_foreign_key "stall_rentals", "tenants"
   add_foreign_key "users", "roles"
 end

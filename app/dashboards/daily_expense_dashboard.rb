@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class DailySaleDashboard < Administrate::BaseDashboard
+class DailyExpenseDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,13 +8,12 @@ class DailySaleDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
     amount: Field::Number.with_options(
       prefix: "₱",
       decimals: 2,
     ),
-    sales_category: Field::BelongsTo,
-    sales_date: Field::Date,
+    expense_category: Field::BelongsTo,
+    expense_date: Field::Date,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,19 +24,17 @@ class DailySaleDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     amount
-    sales_category
-    sales_date
+    expense_category
+    expense_date
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     amount
-    sales_category
-    sales_date
+    expense_category
+    expense_date
     created_at
     updated_at
   ].freeze
@@ -47,8 +44,8 @@ class DailySaleDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     amount
-    sales_category
-    sales_date
+    expense_category
+    expense_date
   ].freeze
 
   # COLLECTION_FILTERS
@@ -63,10 +60,10 @@ class DailySaleDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how daily sales are displayed
+  # Overwrite this method to customize how daily expenses are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(daily_sale)
-    "#{daily_sale.sales_category.name} for #{daily_sale.sales_date.strftime('%B %d, %Y')}"
+  def display_resource(daily_expense)
+    "#{daily_expense.expense_category.name} for #{daily_expense.expense_date.strftime('%B %d, %Y')}"
   end
 end

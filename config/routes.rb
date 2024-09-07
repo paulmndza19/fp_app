@@ -16,6 +16,15 @@ Rails.application.routes.draw do
     resources :sales_categories
     resources :daily_sales, except: %i[destroy]
 
+    resources :expense_categories
+    resources :daily_expenses, except: %i[destroy]
+
+    resources :tenants
+    resources :late_tenants
+    resources :stalls
+    resources :stall_rentals
+    resources :rental_payments
+
     root to: "contributions#index"
   end
   
@@ -36,4 +45,7 @@ Rails.application.routes.draw do
   get "/bylaws", to: "bylaws#index"
 
   get "/users", to: "roles#index"
+  
+  get "/sales", to: "sales#index"
+  get "/expenses", to: "expenses#index"
 end
