@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_19_051521) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_19_153419) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_051521) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "category_names", id: false, force: :cascade do |t|
+    t.text "string_agg"
   end
 
   create_table "claim_request_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -98,6 +102,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_051521) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "membership_fees", force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_membership_fees_on_user_id"
   end
 
   create_table "rental_payments", force: :cascade do |t|
@@ -198,6 +210,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_051521) do
   add_foreign_key "contributions", "users"
   add_foreign_key "daily_expenses", "expense_categories"
   add_foreign_key "daily_sales", "sales_categories"
+  add_foreign_key "membership_fees", "users"
   add_foreign_key "rental_payments", "stall_rentals"
   add_foreign_key "stall_rentals", "stalls"
   add_foreign_key "stall_rentals", "tenants"
