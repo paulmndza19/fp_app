@@ -10,4 +10,8 @@ class ClaimRequest < ApplicationRecord
   has_one_attached :document
 
   validates :document, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg'], on: :create
+
+  def type
+    claim_request_type.name
+  end
 end
