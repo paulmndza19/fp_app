@@ -101,3 +101,5 @@ gem 'dotenv'
 gem 'kaminari'
 # Scheduler
 gem 'whenever', require: false
+# XLSX
+gem 'caxlsx'
