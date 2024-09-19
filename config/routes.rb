@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :contributions
   resources :claim_requests, only: [:index, :new, :create]
   resources :audit_trails, only: [:index], :path => :activity_log
+  resources :archives, only: [:index]
 
   devise_for :users
 
