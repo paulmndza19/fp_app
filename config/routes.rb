@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
   resources :contributions
   resources :claim_requests, only: [:index, :new, :create]
+  resources :audit_trails, only: [:index], :path => :activity_log
 
   devise_for :users
 

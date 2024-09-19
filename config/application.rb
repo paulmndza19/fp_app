@@ -19,5 +19,6 @@ module Rails7DeviseExample
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.assets.css_compressor = nil
+    config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, BigDecimal, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
   end
 end
