@@ -70,28 +70,28 @@ module Admin
 
       report_sql = "
         SELECT
-            TO_CHAR(DATE(ds.created_at), 'FMDay, FMMonth DD, YYYY') \"Date\",
+            COALESCE(TO_CHAR(DATE(ds.sales_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
             #{category_columns_sql}
-            SUM(ds.amount) AS \"Total\"
+            SUM(ds.amount) AS \"Total Canteen Income\",
+            COALESCE(SUM(rp.amount), 0) AS \"Kiosk Income\",
+            SUM(ds.amount) + COALESCE(SUM(rp.amount), 0) AS \"Total Income\"
         FROM
             daily_sales ds
         JOIN
             sales_categories sc ON ds.sales_category_id = sc.id
-        WHERE ds.created_at BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
+        LEFT JOIN rental_payments rp ON DATE(ds.sales_date) = DATE(rp.created_at)
+        WHERE ds.sales_date BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
         GROUP BY
-            DATE(ds.created_at);
+            ROLLUP (DATE(ds.sales_date))
+        ORDER BY
+          DATE(ds.sales_date);
       "
 
       ActiveRecord::Base.connection.exec_query(report_sql)
     end
 
     def total_sales
-      @total_sales = 0
-      result.each do |value|
-        @total_sales+=value["Total"]
-      end
-
-      @total_sales
+      @total_sales = result.last['Total']
     end
   end
 end
