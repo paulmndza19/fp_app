@@ -6,7 +6,7 @@ module Admin
       @result = result
       @total_expense = total_expense
 
-      render "admin/sales_report/index"
+      render "admin/expense_report/index"
     end
 
     def download_excel
@@ -26,18 +26,39 @@ module Admin
           }
         )
 
-        cell_rows = ('a'..'z').to_a
+        column_header_styles = wb.styles.add_style(
+          bg_color: 'f0f799',
+          fg_color: '000000',
+          b: true,
+          alignment: {
+            horizontal: :center,
+            vertical: :center
+          }
+        )
+
+        cell_rows = ('A'..'Z').to_a
 
         sheet.add_row ['Expense Report'], style: header_style
-        sheet.merge_cells("A1::#{cell_rows[result.columns.length - 1]}1")
+        sheet.merge_cells("A1:#{cell_rows[result.columns.length - 1]}1")
 
         # Add the headers
-        sheet.add_row result.columns
+        sheet.add_row result.columns, style: column_header_styles
+
+        result_array = result.to_a
+        total = result.last
+        result_array.pop
 
         # Add data rows
-        result.each do |data|
-          sheet.add_row data.values
+        result_array.each do |data|
+          sheet.add_row data.values, style: wb.styles.add_style(
+            alignment: {
+              horizontal: :center,
+              vertical: :center
+            }
+          )
         end
+
+        sheet.add_row total.values, style: column_header_styles
       end
 
       # Send the Excel file as a response

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :rental_payments
 
     resources :sales_reports, only: [:index]
-    get "/sales_reports_xlsx", to: "sales_reports#download_excel"
+    get "/sales_report_xlsx", to: "sales_reports#download_excel"
 
     resources :expense_reports, only: [:index]
     get "/expense_reports_xlsx", to: "expense_reports#download_excel"

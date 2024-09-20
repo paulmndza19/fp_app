@@ -1,4 +1,6 @@
 class ClaimRequestUpdateMailer < ApplicationMailer
+  default from: 'fpaccess.lspu@gmail.com'
+
   # Mail for approval
   def approval_email(claim_request)
     @claim_request = claim_request
