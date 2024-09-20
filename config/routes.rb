@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     resources :cashflow_reports, only: [:index]
     get "/cashflow_reports_xlsx", to: "cashflow_reports#download_excel"
 
+    resources :kiosk_rental_reports, only: [:index]
+    get "/kiosk_rental_reports_xlsx", to: "kiosk_rental_reports#download_excel"
+
     resources :audit_trails, only: [:index], path: :activity_log
 
     root to: "contributions#index"

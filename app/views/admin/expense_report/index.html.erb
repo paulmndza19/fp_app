@@ -1,5 +1,5 @@
 <div class="p-6">
-  <h1 class="text-3xl mb-2">Daily Expense for Selected Month</h1>
+  <h1 class="text-3xl mb-2">Expense report for selected month</h1>
 
   <hr/>
 
@@ -59,9 +59,6 @@
         <% end %>
       </div>
     </div>
-
-    <!-- Show the total expenses for the entire month -->
-    <h2 class="text-xl">Total Expenses for <%= params[:month] ? Date.parse(params[:month].concat('-01')).strftime('%B %Y') : Date.today.strftime("%B %Y") %>: <%= number_to_currency(@total_expenses, unit: "₱") %></h2>
   </div>
 </div>
 

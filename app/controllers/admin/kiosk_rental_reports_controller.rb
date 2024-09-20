@@ -1,12 +1,12 @@
 module Admin
-  class SalesReportsController < Admin::ApplicationController
+  class KioskRentalReportsController < Admin::ApplicationController
     require 'caxlsx'
 
     def index
       @result = result
       @total_sales = total_sales
 
-      render "admin/sales_report/index"
+      render "admin/kiosk_rental_reports/index"
     end
 
     def download_excel
@@ -15,7 +15,7 @@ module Admin
       wb = p.workbook
 
       # Add a worksheet
-      wb.add_worksheet(name: "Canteen Sales #{month.strftime('%m-%Y')}") do |sheet|
+      wb.add_worksheet(name: "Cashflow Report #{month.strftime('%m-%Y')}") do |sheet|
         header_style = wb.styles.add_style(
           bg_color: '02992a',
           fg_color: 'FFFFFF',
@@ -28,7 +28,7 @@ module Admin
 
         cell_rows = ('a'..'z').to_a
 
-        sheet.add_row ['Sales Report'], style: header_style
+        sheet.add_row ['Cashflow Report'], style: header_style
         sheet.merge_cells("A1::#{cell_rows[result.columns.length - 1]}1")
 
         # Add the headers
@@ -41,7 +41,7 @@ module Admin
       end
 
       # Send the Excel file as a response
-      file_name = "sales_report_#{month.strftime('%Y%m%d')}.xlsx"
+      file_name = "kiosk_rental_report_#{month.strftime('%Y%m%d')}.xlsx"
       send_data p.to_stream.read, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                                   filename: file_name
     end
@@ -57,31 +57,17 @@ module Admin
     end
 
     def result
-      sales_categories = SalesCategory.pluck(:name)
-
-      category_columns_sql = ''
-
-      sales_categories.each do |category|
-        category_columns_sql+="SUM(CASE WHEN sc.name = '#{category}' THEN ds.amount ELSE 0 END) AS \"#{category}\",\n"
-      end
-
       report_sql = "
         SELECT
-            COALESCE(TO_CHAR(DATE(ds.sales_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
-            #{category_columns_sql}
-            SUM(ds.amount) AS \"Total Canteen Income\",
-            COALESCE(SUM(rp.amount), 0) AS \"Kiosk Income\",
-            SUM(ds.amount) + COALESCE(SUM(rp.amount), 0) AS \"Total Income\"
+          COALESCE(TO_CHAR(DATE(rp.created_at), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
+          COALESCE(SUM(rp.amount), 0) AS \"Total Kiosk Payments\"
         FROM
-            daily_sales ds
-        JOIN
-            sales_categories sc ON ds.sales_category_id = sc.id
-        LEFT JOIN rental_payments rp ON DATE(ds.sales_date) = DATE(rp.created_at)
-        WHERE ds.sales_date BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
+          rental_payments rp
+        WHERE rp.created_at BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
         GROUP BY
-            ROLLUP (DATE(ds.sales_date))
+            ROLLUP (DATE(rp.created_at))
         ORDER BY
-          DATE(ds.sales_date);
+          DATE(rp.created_at);
       "
 
       ActiveRecord::Base.connection.exec_query(report_sql)

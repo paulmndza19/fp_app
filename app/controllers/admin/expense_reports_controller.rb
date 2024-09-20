@@ -38,9 +38,6 @@ module Admin
         result.each do |data|
           sheet.add_row data.values
         end
-
-        sheet.add_row
-        sheet.add_row ['Total', total_sales]
       end
 
       # Send the Excel file as a response

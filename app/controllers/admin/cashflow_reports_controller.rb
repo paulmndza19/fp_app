@@ -38,13 +38,10 @@ module Admin
         result.each do |data|
           sheet.add_row data.values
         end
-
-        sheet.add_row
-        sheet.add_row ['Total', total_sales]
       end
 
       # Send the Excel file as a response
-      file_name = "sales_report_#{month.strftime('%Y%m%d')}.xlsx"
+      file_name = "cashflow_report_#{month.strftime('%Y%m%d')}.xlsx"
       send_data p.to_stream.read, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                                   filename: file_name
     end
@@ -60,14 +57,6 @@ module Admin
     end
 
     def result
-      sales_categories = SalesCategory.pluck(:name)
-
-      category_columns_sql = ''
-
-      sales_categories.each do |category|
-        category_columns_sql+="SUM(CASE WHEN sc.name = '#{category}' THEN ds.amount ELSE 0 END) AS \"#{category}\",\n"
-      end
-
       report_sql = "
         SELECT
           COALESCE(TO_CHAR(DATE(ds.sales_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",

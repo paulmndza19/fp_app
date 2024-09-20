@@ -64,7 +64,7 @@ as defined by the routes in the `admin/` namespace
     >
       <%
         resources = Administrate::Namespace.new(namespace).resources_with_index_route
-        resources = resources.reject{|route| ['sales_reports', 'expense_reports', 'audit_trails', 'cashflow_reports'].include? route}
+        resources = resources.reject{|route| ['sales_reports', 'expense_reports', 'audit_trails', 'cashflow_reports', 'kiosk_rental_reports'].include? route}
         admin_resources = resources.reject do |route|
           ['sales_categories', 'daily_sales', 'tenants', 'late_tenants', 'stalls', 'stall_rentals', 'rental_payments', 'expense_categories', 'daily_expenses'].include? route
         end
@@ -271,6 +271,14 @@ as defined by the routes in the `admin/` namespace
             </svg>
 
             <span> Expense Reports </span>
+          </a>
+
+          <!-- Kiosk Reports -->
+          <a class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 navigation__link--inactive" href="/admin/kiosk_rental_reports">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819" />
+            </svg>
+            <span> Kiosk Rental Reports </span>
           </a>
         </ul>
       </div>
