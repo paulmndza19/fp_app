@@ -60,6 +60,14 @@ module Admin
         :birthday,
         :role_id,
         :password,
+        :address,
+        :civil_status,
+        :date_employed,
+        :start_of_membership,
+        :no_of_children,
+        :parent_name,
+        :office,
+        :full_time
       )
     end
 
