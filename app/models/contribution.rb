@@ -6,7 +6,7 @@ class Contribution < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
-  before_validation :set_receipt_number
+  # before_validation :set_receipt_number
 
   validates :receipt_number, uniqueness: true
 

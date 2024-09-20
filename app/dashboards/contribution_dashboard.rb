@@ -65,6 +65,7 @@ class ContributionDashboard < Administrate::BaseDashboard
     amount
     month
     year
+    receipt_number
   ].freeze
 
   # COLLECTION_FILTERS
