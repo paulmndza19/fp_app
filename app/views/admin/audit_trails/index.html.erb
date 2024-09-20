@@ -1,0 +1,93 @@
+<div class="container mx-auto px-4 sm:px-8">
+  <div class="py-8">
+    <div class="flex justify-between">
+      <h2 class="text-2xl font-semibold leading-tight">Activity Log</h2>
+    </div>
+    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+      <div
+        class="inline-block min-w-full shadow-md rounded-lg overflow-hidden"
+      >
+        <table class="min-w-full leading-normal">
+          <thead>
+            <tr>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+              >
+                Type
+              </th>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+              >
+                Item ID
+              </th>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+              >
+                Updater
+              </th>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+              >
+                Event
+              </th>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+              >
+                Changes
+              </th>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+              >
+                Timestamp (UTC)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @versions.each do |version| %>
+              <tr>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <div class="flex">
+                    <div class="ml-3">
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        <%= version.item_type.underscore.humanize %>
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <p class="text-gray-900 whitespace-no-wrap"><%= version.item_id %></p>
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <p class="text-gray-900 whitespace-no-wrap"><%= version.user&.name %></p>
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <p class="text-gray-900 whitespace-no-wrap">
+                    <%= version.event %>
+                  </p>
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <p class="text-gray-900 whitespace-no-wrap">
+                    <ul>
+                        <% changeset = version.changeset %>
+                        <% changeset.delete("updated_at") %>
+                        <% changeset&.each do |key, value| %>
+                            <li> <%= "#{key}: #{value.first} -> #{value.last}" %> </li>
+                        <% end %>
+                    </ul>
+                  </p>
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <p class="text-gray-900 whitespace-no-wrap"><%= version.created_at.strftime('%B %d, %Y %H:%M') %></p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="py-4">
+          <%= paginate @versions, outer_window: 3, left: 1, right: 3 %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

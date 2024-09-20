@@ -32,12 +32,13 @@ Rails.application.routes.draw do
     resources :expense_reports, only: [:index]
     get "/sales_reports_xlsx", to: "sales_reports#download_excel"
 
+    resources :audit_trails, only: [:index], path: :activity_log
 
     root to: "contributions#index"
   end
   resources :contributions
   resources :claim_requests, only: [:index, :new, :create]
-  resources :audit_trails, only: [:index], :path => :activity_log
+  resources :audit_trails, only: [:index], path: :activity_log
   resources :archives, only: [:index]
 
   devise_for :users
