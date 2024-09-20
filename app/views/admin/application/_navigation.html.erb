@@ -130,6 +130,15 @@ as defined by the routes in the `admin/` namespace
                   <% end %>
                 </svg>
                 <span><%= display_resource_name(resource) %></span>
+                <% if display_resource_name(resource) == "Claim Requests" %>
+                  <% pending_request_count = ClaimRequest.where(status: 'pending').count %>
+                  <% if pending_request_count > 0 %>
+                    <span class="relative inline-block px-2 py-1 text-black leading-tight">
+                      <span aria-hidden="" class="absolute inset-0 bg-white rounded-full"></span>
+                      <span class="relative text-xs"><%= pending_request_count %></span>
+                    </span>
+                  <% end %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
