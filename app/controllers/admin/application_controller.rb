@@ -14,7 +14,10 @@ module Admin
 
     def authenticate_user!
       super
-      redirect_to '/', alert: "You do not have access to this resouce" unless current_user.is_admin?
+        redirect_to '/admin/users' if current_user.is_secretary? && params["controller"] != 'admin/users'
+
+        redirect_to '/', alert: "You do not have access to this resouce" unless current_user.is_admin? || current_user.is_secretary?
+  
     end
 
     # Override this value to specify the number of elements to display at a time

@@ -53,6 +53,7 @@ module Admin
     #
     def resource_params
       params.require(:user).permit(
+        :member_id_number,
         :first_name,
         :middle_name,
         :last_name,

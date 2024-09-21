@@ -6,9 +6,9 @@ class Contribution < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
-  # has_one_attached :document
+  has_one_attached :document
 
-  # validates :document, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+  validates :document, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
 
   before_validation :set_receipt_number
 
@@ -38,6 +38,18 @@ class Contribution < ApplicationRecord
     User.find(user_id).name
   end
 
+  def date_from
+  
+  end
+
+  def date_to
+  
+  end
+
+  def formatted_month
+    month.strftime('%B %Y')
+  end
+
   private
 
   def set_receipt_number
@@ -57,3 +69,4 @@ class Contribution < ApplicationRecord
     latest_contribution.receipt_number.split("-").last.to_i
   end
 end
+
