@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_20_024307) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.text "remarks"
     t.index ["claim_request_type_id"], name: "index_claim_requests_on_claim_request_type_id"
     t.index ["user_id"], name: "index_claim_requests_on_user_id"
   end

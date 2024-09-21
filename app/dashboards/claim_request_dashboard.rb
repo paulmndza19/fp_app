@@ -9,13 +9,14 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::String,
+    remarks: Field::String,
     claim_request_type: Field::BelongsTo,
     deleted_at: Field::DateTime,
     status: Field::Select.with_options(collection: %w[Pending Approved Rejected]),
     user: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    document: Field::ActiveStorage.with_options(index_display_preview: false),
+    document: Field::ActiveStorage.with_options(index_display_preview: true),
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -27,6 +28,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
     user
     claim_request_type
     status
+    remarks
     document
   ].freeze
 
@@ -37,6 +39,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
     user
     claim_request_type
     status
+    remarks
     created_at
     updated_at
     document
@@ -49,6 +52,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
     user
     claim_request_type
     status
+    remarks
   ].freeze
 
   # COLLECTION_FILTERS

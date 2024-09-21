@@ -4,7 +4,7 @@
 #
 # If you want to add pagination or other controller-level concerns,
 # you're free to overwrite the RESTful controller actions.
-module Admin
+module Secretary
   class ApplicationController < Administrate::ApplicationController
     before_action :authenticate_admin, :set_paper_trail_whodunnit
 
@@ -14,10 +14,7 @@ module Admin
 
     def authenticate_user!
       super
-        redirect_to '/admin/users' if current_user.is_secretary? && params["controller"] != 'admin/users'
-
-        redirect_to '/', alert: "You do not have access to this resouce" unless current_user.is_admin? || current_user.is_secretary?
-  
+      redirect_to '/', alert: "You do not have access to this resouce" unless current_user.is_admin?
     end
 
     # Override this value to specify the number of elements to display at a time

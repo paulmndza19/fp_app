@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-4">
   <!-- ===== First Row Start ===== -->
   <div class="flex justify-between space-x-6 mx-6 mt-12">
-    <% if @current_user.is_admin? %>
+    <% if @current_user.is_admin? || @current_user.is_secretary? %>
   <div class="parent-container">
       <!-- ===== Your Total Contributions Start ===== -->
       <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
@@ -91,7 +91,9 @@
         </div>
       </div>
     <!-- ===== User Count End ===== -->
+    <% end %>
 
+    <% if @current_user.is_admin? %>
     <!-- ===== Total Contributions Start ===== -->
       <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
         <div class="py-4 px-6">
@@ -200,6 +202,12 @@
   <% end %>
   <!-- ===== First Row End ===== -->
 
+
+  <% if @current_user.is_secretary? %>
+  
+  <% end %>
+
+  
   <!-- ===== Second Row Start ===== -->
   <div class="flex justify-left align-center mt-12">
     <% if @current_user.is_admin? %>

@@ -22,12 +22,15 @@ class ContributionDashboard < Administrate::BaseDashboard
       prefix: "₱",
       decimals: 2,
     ),
-    month: Field::Select.with_options(collection: MONTHS),
+    formatted_month: Field::String,
+    month: Field::Date,
+    date_from: Field::Date,
+    date_to: Field::Date,
     user: Field::BelongsTo,
-    year: Field::Select.with_options(collection: YEAR_OPTIONS),
     receipt_number: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    document: Field::ActiveStorage.with_options(index_display_preview: true),
     # created_by: Field::String,
     # updated_by: Field::String,
   }.freeze
@@ -38,23 +41,23 @@ class ContributionDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    user
     receipt_number
+    user
     amount
-    month
-    year
+    formatted_month
+    document
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    user
     receipt_number
+    user
     amount
     month
-    year
     created_at
     updated_at
+    document
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -63,8 +66,9 @@ class ContributionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     user
     amount
-    month
-    year
+    date_from
+    date_to
+    document
     receipt_number
   ].freeze
 
@@ -80,7 +84,6 @@ class ContributionDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {
     month: -> (resources, attr) {resources.where(month: attr)},
-    year: -> (resources, attr) {resources.where(year: attr)},
     receipt_number: -> (resources, attr) {resources.where(receipt_number: attr)}
   }.freeze
 
@@ -88,6 +91,6 @@ class ContributionDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(contribution)
-    "#{contribution.user.name} #{contribution.month} #{contribution.year} Contribution"
+    "#{contribution.user.name} #{contribution.month.strftime("%B")} #{contribution.month.strftime("%Y")} Contribution"
   end
 end

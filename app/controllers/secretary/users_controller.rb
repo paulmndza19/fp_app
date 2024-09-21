@@ -1,5 +1,5 @@
-module Admin
-  class UsersController < Admin::ApplicationController
+module Secretary
+  class UsersController < Secretary::ApplicationController
     # before_action :set_temporary_password, only: [:create]
 
     # Overwrite any of the RESTful controller actions to implement custom behavior
@@ -53,7 +53,6 @@ module Admin
     #
     def resource_params
       params.require(:user).permit(
-        :member_id_number,
         :first_name,
         :middle_name,
         :last_name,
@@ -61,14 +60,6 @@ module Admin
         :birthday,
         :role_id,
         :password,
-        :address,
-        :civil_status,
-        :date_employed,
-        :start_of_membership,
-        :no_of_children,
-        :parent_name,
-        :office,
-        :full_time
       )
     end
 

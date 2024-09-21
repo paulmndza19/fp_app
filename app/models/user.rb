@@ -29,6 +29,10 @@ class User < ApplicationRecord
     role.name.downcase == 'member'
   end
 
+  def is_secretary?
+    role.name.downcase == 'secretary'
+  end
+
   private
 
   def set_member_id

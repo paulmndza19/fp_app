@@ -6,6 +6,10 @@ class Contribution < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
+  has_one_attached :document
+
+  validates :document, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+
   # before_validation :set_receipt_number
 
   validates :receipt_number, uniqueness: true
@@ -32,6 +36,18 @@ class Contribution < ApplicationRecord
     return if user_id.nil?
 
     User.find(user_id).name
+  end
+
+  def date_from
+
+  end
+
+  def date_to
+
+  end
+
+  def formatted_month
+    month.strftime('%B %Y')
   end
 
   private

@@ -1,7 +1,7 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
   resources :roles
   resources :claim_request_types
-
+    
   namespace :admin, admin: true do
     resources :contributions
     resources :roles
@@ -42,6 +42,7 @@ Rails.application.routes.draw do
 
     root to: "contributions#index"
   end
+  
   resources :contributions
   resources :claim_requests, only: [:index, :new, :create]
   resources :audit_trails, only: [:index], path: :activity_log
@@ -49,10 +50,19 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  namespace :secretary do
+    resources :users
+
+    root to: "home#index"
+  end
+
   root to: "home#index"
   get "/dashboard", to: "home#dashboard"
 
   get "/bylaws", to: "bylaws#index"
+
+  get "/users", to: "roles#index"
+  
   get "/sales", to: "sales#index"
   get "/expenses", to: "expenses#index"
 end
