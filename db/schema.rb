@@ -70,12 +70,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_20_024307) do
   create_table "contributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.decimal "amount"
-    t.string "month"
-    t.string "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.string "receipt_number"
+    t.date "month"
     t.index ["deleted_at"], name: "index_contributions_on_deleted_at"
     t.index ["receipt_number"], name: "index_contributions_on_receipt_number", unique: true
     t.index ["user_id"], name: "index_contributions_on_user_id"

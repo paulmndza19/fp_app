@@ -15,9 +15,9 @@ class ContributionsTest < ApplicationSystemTestCase
     click_on "New contribution"
 
     fill_in "Amount", with: @contribution.amount
-    fill_in "Month", with: @contribution.month
+    fill_in "Month", with: @contribution.month&.strftime('%B')
     fill_in "User", with: @contribution.user_id
-    fill_in "Year", with: @contribution.year
+    fill_in "Year", with: @contribution.month&.strftime('%B')
     click_on "Create Contribution"
 
     assert_text "Contribution was successfully created"
@@ -29,9 +29,9 @@ class ContributionsTest < ApplicationSystemTestCase
     click_on "Edit this contribution", match: :first
 
     fill_in "Amount", with: @contribution.amount
-    fill_in "Month", with: @contribution.month
+    fill_in "Month", with: @contribution.month&.strftime('%B')
     fill_in "User", with: @contribution.user_id
-    fill_in "Year", with: @contribution.year
+    fill_in "Year", with: @contribution.month&.strftime('%B')
     click_on "Update Contribution"
 
     assert_text "Contribution was successfully updated"

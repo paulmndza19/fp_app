@@ -11,12 +11,12 @@
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Month:</strong>
-    <%= contribution.month %>
+    <%= contribution.month&.strftime('%B') %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Year:</strong>
-    <%= contribution.year %>
+    <%= contribution.month&.strftime('%Y') %>
   </p>
 
   <% if action_name != "show" %>

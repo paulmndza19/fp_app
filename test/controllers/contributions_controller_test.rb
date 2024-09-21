@@ -17,7 +17,7 @@ class ContributionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create contribution" do
     assert_difference("Contribution.count") do
-      post contributions_url, params: { contribution: { amount: @contribution.amount, month: @contribution.month, user_id: @contribution.user_id, year: @contribution.year } }
+      post contributions_url, params: { contribution: { amount: @contribution.amount, month: @contribution.month&.strftime('%B'), user_id: @contribution.user_id, year: @contribution.month&.strftime('%B') } }
     end
 
     assert_redirected_to contribution_url(Contribution.last)
@@ -34,7 +34,7 @@ class ContributionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update contribution" do
-    patch contribution_url(@contribution), params: { contribution: { amount: @contribution.amount, month: @contribution.month, user_id: @contribution.user_id, year: @contribution.year } }
+    patch contribution_url(@contribution), params: { contribution: { amount: @contribution.amount, month: @contribution.month&.strftime('%B'), user_id: @contribution.user_id, year: @contribution.month&.strftime('%B') } }
     assert_redirected_to contribution_url(@contribution)
   end
 
