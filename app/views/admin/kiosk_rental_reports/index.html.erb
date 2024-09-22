@@ -1,0 +1,74 @@
+<div class="p-6">
+  <h1 class="text-3xl mb-2">Kiosk rental report for selected month</h1>
+
+  <hr/>
+
+  <div class="py-4">
+    <%= form_tag admin_cashflow_reports_path, method: :get, class: 'month-selector-form', id: 'kiosk-rental-report-form' do %>
+      <div class="flex gap-4">
+        <label class="text-xl py-3">Select a Month:</label>
+        <select name="month" id="category-select">
+            <option> Select month </option>
+          <% (1..12).each do |month| %>
+            <option value="<%= "#{Date.today.year}-#{'%02d' % month}" %>" <%= 'selected' if params[:month] == "#{Date.today.year}-#{'%02d' % month}" %>>
+              <%= Date::MONTHNAMES[month] %> <%= Date.today.year %>
+            </option>
+          <% end %>
+        </select>
+        <a href="<%= admin_kiosk_rental_reports_xlsx_path(month: params[:month]) %>" class='rounded-lg py-3 px-5 bg-green-200 text-green-700 block font-medium'> Download </a>
+      </div>
+    <% end %>
+
+    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+      <div
+        class="inline-block min-w-full shadow-md rounded-lg overflow-hidden"
+      >
+        <% if @result.empty? %>
+          <div class="flex justify-center">
+            <h1 class="text-2xl py-6"> No records found </h1>
+          </div>
+        <% else %>
+          <table class="min-w-full leading-normal my-6">
+            <thead>
+              <tr>
+                <% @result.columns.each do |header| %>
+                  <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                  > 
+                    <%= header %>
+                  </th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <% @result.each do |row| %>
+                <tr>
+                  <% row.values.each do |value| %>
+                    <% formatted_value = if value.is_a?(BigDecimal)
+                        number_to_currency(value, unit: "₱")
+                      else
+                        value
+                      end
+                    %>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm"><%= formatted_value %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  var selectElement = document.getElementById('category-select');
+  var formElement = document.getElementById('kiosk-rental-report-form');
+
+  selectElement.addEventListener('change', function() {
+    formElement.submit();
+  });
+});
+</script>

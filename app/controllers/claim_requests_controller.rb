@@ -26,6 +26,8 @@ class ClaimRequestsController < ApplicationController
 
     respond_to do |format|
       if @claim_request.save
+        NewClaimRequestMailer.new_request(@claim_request).deliver_now
+
         format.html { redirect_to claim_requests_url, notice: "Claim request was successfully created." }
         format.json { render :show, status: :created, location: @claim_request }
       else

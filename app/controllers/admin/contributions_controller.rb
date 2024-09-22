@@ -16,10 +16,8 @@ module Admin
             amount: resource_params["amount"],
             month: date,
             document: resource_params["document"]
-            # document: @claim_request.document.attach(claim_request_params[:document])
-            
           )
-        end 
+        end
         redirect_to action: "index"
       end
     end

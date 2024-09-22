@@ -69,6 +69,7 @@ class ContributionDashboard < Administrate::BaseDashboard
     date_from
     date_to
     document
+    receipt_number
   ].freeze
 
   # COLLECTION_FILTERS

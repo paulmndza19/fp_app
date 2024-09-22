@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_22_141555) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_20_024307) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_22_141555) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "category_names", id: false, force: :cascade do |t|
+    t.text "string_agg"
+  end
+
   create_table "claim_request_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -66,12 +70,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_22_141555) do
   create_table "contributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.decimal "amount"
-    t.string "month"
-    t.string "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.string "receipt_number"
+    t.date "month"
     t.index ["deleted_at"], name: "index_contributions_on_deleted_at"
     t.index ["receipt_number"], name: "index_contributions_on_receipt_number", unique: true
     t.index ["user_id"], name: "index_contributions_on_user_id"
@@ -99,6 +102,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_22_141555) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "membership_fees", force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_membership_fees_on_user_id"
   end
 
   create_table "rental_payments", force: :cascade do |t|
@@ -173,6 +184,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_22_141555) do
     t.datetime "deleted_at"
     t.uuid "role_id", null: false
     t.string "member_id_number"
+    t.text "address"
+    t.string "contact_no"
+    t.string "civil_status"
+    t.date "date_employed"
+    t.date "start_of_membership"
+    t.integer "no_of_children"
+    t.string "parent_name"
+    t.boolean "full_time"
+    t.string "office"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -188,6 +208,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_22_141555) do
     t.string "whodunnit"
     t.text "object"
     t.datetime "created_at"
+    t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
@@ -198,6 +219,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_22_141555) do
   add_foreign_key "contributions", "users"
   add_foreign_key "daily_expenses", "expense_categories"
   add_foreign_key "daily_sales", "sales_categories"
+  add_foreign_key "membership_fees", "users"
   add_foreign_key "rental_payments", "stall_rentals"
   add_foreign_key "stall_rentals", "stalls"
   add_foreign_key "stall_rentals", "tenants"

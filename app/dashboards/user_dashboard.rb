@@ -36,7 +36,15 @@ class UserDashboard < Administrate::BaseDashboard
     role: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    password: Field::Password
+    password: Field::Password,
+    address: Field::Text,
+    civil_status: Field::Select.with_options(collection: [nil, 'Single', 'Married', 'Widowed', 'Separated']),
+    date_employed: Field::Date,
+    start_of_membership: Field::Date,
+    no_of_children: Field::Number,
+    parent_name: Field::String,
+    office: Field::Select.with_options(collection: [nil, 'Faculty', 'Admin']),
+    full_time: Field::Boolean
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -61,6 +69,14 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     email
     birthday
+    address
+    civil_status
+    date_employed
+    start_of_membership
+    no_of_children
+    parent_name
+    office
+    full_time
     role
     created_at
     updated_at
@@ -76,6 +92,14 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     email
     birthday
+    address
+    civil_status
+    date_employed
+    start_of_membership
+    no_of_children
+    parent_name
+    office
+    full_time
     role
   ].freeze
 

@@ -10,7 +10,7 @@ class Contribution < ApplicationRecord
 
   validates :document, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
 
-  before_validation :set_receipt_number
+  # before_validation :set_receipt_number
 
   validates :receipt_number, uniqueness: true
 
@@ -39,11 +39,11 @@ class Contribution < ApplicationRecord
   end
 
   def date_from
-  
+
   end
 
   def date_to
-  
+
   end
 
   def formatted_month
@@ -69,4 +69,3 @@ class Contribution < ApplicationRecord
     latest_contribution.receipt_number.split("-").last.to_i
   end
 end
-

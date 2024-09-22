@@ -44,7 +44,7 @@ Rails.application.configure do
   # Do email deliveries in development
   config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.default_options = {from: "paulmndza07@gmail.com"}
+  config.action_mailer.default_options = {from: 'fpaccess.lspu@gmail.com'}
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {

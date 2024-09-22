@@ -11,12 +11,12 @@ class User < ApplicationRecord
   has_many :contributions
   has_many :claim_requests
 
-  before_validation :set_member_id
+  before_validation :set_member_id, on: :create
 
-  validates :member_id_number, uniqueness: true
+  validates :member_id_number, uniqueness: true, on: :create
 
   MEMBER_ID_NUMBER_LENGTH = 3
-  
+
   def name
     "#{first_name} #{last_name}"
   end
@@ -33,7 +33,7 @@ class User < ApplicationRecord
     role.name.downcase == 'secretary'
   end
 
-  private 
+  private
 
   def set_member_id
     latest_member_id_length = latest_member_id.nil? ? 1 : latest_member_id.to_s.length
@@ -49,4 +49,4 @@ class User < ApplicationRecord
 
     latest_user.member_id_number.split("-").last.to_i
   end
-end 
+end
