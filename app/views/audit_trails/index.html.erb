@@ -59,13 +59,15 @@
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <p class="text-gray-900 whitespace-no-wrap">
-                    <ul>
-                        <% changeset = version.changeset %>
-                        <% changeset.delete("updated_at") %>
-                        <% changeset&.each do |key, value| %>
-                            <li> <%= "#{key}: #{value.first} -> #{value.last}" %> </li>
-                        <% end %>
-                    </ul>
+                    <% if version.event == "update" %>
+                      <ul>
+                          <% changeset = version.changeset %>
+                          <% changeset.delete("updated_at") %>
+                          <% changeset&.each do |key, value| %>
+                              <li> <%= "#{key}: #{value.first} -> #{value.last}" %> </li>
+                          <% end %>
+                      </ul>
+                    <% end %>
                   </p>
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">

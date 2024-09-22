@@ -8,6 +8,6 @@ PaperTrail.config.has_paper_trail_defaults = {
 
 module PaperTrail
   class Version < ::ActiveRecord::Base
-    belongs_to :user, foreign_key: :whodunnit
+    belongs_to :user, foreign_key: :whodunnit, optional: true
   end
 end

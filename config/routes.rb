@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :claim_request_types
     
   namespace :admin, admin: true do
-    resources :contributions
+    resources :contributions, except: %i[edit update destroy]
     resources :roles
     resources :users
     resources :claim_request_types

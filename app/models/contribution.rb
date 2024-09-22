@@ -12,7 +12,7 @@ class Contribution < ApplicationRecord
 
   # before_validation :set_receipt_number
 
-  validates :receipt_number, uniqueness: true
+  validates :receipt_number, uniqueness: true, presence: true
 
   belongs_to :user
 

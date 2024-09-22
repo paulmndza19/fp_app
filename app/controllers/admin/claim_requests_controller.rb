@@ -5,10 +5,11 @@ module Admin
     #
     def update
       super
+      binding.pry
       if params[:claim_request][:status] == 'Approved'
-        ClaimRequestUpdateMailer.approval_email(requested_resource).deliver_later
+        ClaimRequestUpdateMailer.approval_email(requested_resource).deliver_now
       else
-        ClaimRequestUpdateMailer.rejection_email(requested_resource).deliver_later
+        ClaimRequestUpdateMailer.rejection_email(requested_resource).deliver_now
       end
     end
 

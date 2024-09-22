@@ -15,13 +15,20 @@ module Admin
             user_id: resource_params["user_id"],
             amount: resource_params["amount"],
             month: date,
-            document: resource_params["document"]
+            document: resource_params["document"],
+            receipt_number: resource_params["receipt_number"] 
           )
-        end
+        end 
         redirect_to action: "index"
       end
     end
 
+    def update
+      resource_params.delete("date_from")
+      resource_params.delete("date_to")
+
+      super
+    end
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`
     # actions.
@@ -49,7 +56,7 @@ module Admin
     # and `dashboard`:
     #
      def resource_params
-       params.require(:contribution).permit(:user_id, :amount, :date_from, :date_to, :year, :document)
+       params.require(:contribution).permit(:user_id, :amount, :date_from, :date_to, :receipt_number, :document) 
         #  permit(dashboard.permitted_attributes(action_name)).
         #  transform_values { |value| value == "" ? nil : value }
      end

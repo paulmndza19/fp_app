@@ -66,6 +66,6 @@ class ContributionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contribution_params
-      params.require(:contribution).permit(:user_id, :amount, :month, :year)
+      params.require(:contribution).permit(:user_id, :amount, :month, :year, :receipt_number, :document)
     end
 end
