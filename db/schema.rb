@@ -42,10 +42,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_20_024307) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "category_names", id: false, force: :cascade do |t|
-    t.text "string_agg"
-  end
-
   create_table "claim_request_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false

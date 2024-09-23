@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 puts "Creating admin role..."
-admin = Role.create(name: 'Admin')
+admin = Role.create!(name: 'Admin')
 
 puts "Creating member role..."
 member = Role.create(name: 'Member')
@@ -37,7 +37,7 @@ User.create(
 User.create(
   [
     # member_1
-    { email: "carlotest@gmail.com",
+    { email: "crlxltbr@gmail.com",
       first_name: "Jesse Carlo",
       last_name: "Altobar",
       password: "member1",
@@ -279,70 +279,58 @@ User.create(
   ]
 )
 
-carlo_user = User.find_by(email: "carlotest@gmail.com")
+carlo_user = User.find_by(email: "crlxltbr@gmail.com")
 
 puts "Creating contribution..."
 Contribution.create(
   [
     { user_id: carlo_user.id,
       amount: 50,
-      month: "January",
-      year: "2023"  },
+      month: "2024/01/01", },
       
       { user_id: carlo_user.id,
       amount: 50,
-      month: "February",
-      year: "2023"  },
+      month: "2024/02/01", },
       
       { user_id: carlo_user.id,
       amount: 50,
-      month: "March",
-      year: "2023"  },
+      month: "2024/03/01", },
 
       { user_id: carlo_user.id,
       amount: 50,
-      month: "April",
-      year: "2023"  },
+      month: "2024/04/01", },
       
       { user_id: carlo_user.id,
       amount: 50,
-      month: "May",
-      year: "2023"  },
+      month: "2024/05/01", },
       
       { user_id: carlo_user.id,
       amount: 50,
-      month: "June",
-      year: "2023"  },
+      month: "2024/06/01", },
 
       { user_id: carlo_user.id,
       amount: 50,
-      month: "July",
-      year: "2023"  },
+      month: "2024/07/01", },
       
       { user_id: carlo_user.id,
       amount: 50,
-      month: "August",
-      year: "2023"  },
+      month: "2024/08/01", },
       
       { user_id: carlo_user.id,
       amount: 50,
-      month: "September",
-      year: "2023"  },
+      month: "2024/09/01", },
 
       { user_id: carlo_user.id,
       amount: 50,
-      month: "October",
-      year: "2023"  },
+      month: "2024/10/01", },
       
       { user_id: carlo_user.id,
       amount: 50,
-      month: "November",
-      year: "2023"  },
+      month: "2024/11/01", },
       
       { user_id: carlo_user.id,
       amount: 50,
-      month: "December",
-      year: "2023"  },
+      month: "2024/12/01", },
   ]
 )
 
