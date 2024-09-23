@@ -10,13 +10,20 @@ puts "Creating admin role..."
 admin = Role.create!(name: 'Admin')
 
 puts "Creating member role..."
-member = Role.create(name: 'Member')
+member = Role.create!(name: 'Member')
+
+puts "Creating president role..."
+president = Role.create!(name: 'President')
 
 puts "Creating secretary role..."
-secretary = Role.create(name: 'Secretary')
+secretary = Role.create!(name: 'Secretary')
+
+puts "Creating auditor role..."
+auditor = Role.create!(name: 'Auditor')
 
 puts "Creating users..."
-User.create(
+User.create!(
+  
   email: "testuser@gmail.com",
   first_name: "Mia",
   last_name: "Villarica",
@@ -25,7 +32,16 @@ User.create(
   role_id: admin.id
 )
 
-User.create(
+User.create!(
+  email: "testpres@gmail.com",
+  first_name: "Ray Samuel",
+  last_name: "Grecalda",
+  password: "password",
+  birthday: "12/12/2000",
+  role_id: president.id
+)
+
+User.create!(
   email: "testsec@gmail.com",
   first_name: "Jean",
   last_name: "Cabela",
@@ -34,7 +50,16 @@ User.create(
   role_id: secretary.id
 )
 
-User.create(
+User.create!(
+  email: "testaudit@gmail.com",
+  first_name: "Marie Ann",
+  last_name: "Gonzales",
+  password: "password",
+  birthday: "12/12/2000",
+  role_id: auditor.id
+)
+
+User.create!(
   [
     # member_1
     { email: "crlxltbr@gmail.com",
@@ -281,61 +306,73 @@ User.create(
 
 carlo_user = User.find_by(email: "crlxltbr@gmail.com")
 
-puts "Creating contribution..."
-Contribution.create(
-  [
-    { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/01/01", },
+# puts "Creating contribution..."
+# Contribution.create(
+#   [
+#     { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "January",
+#       year: "2023"  },
       
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/02/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "February",
+#       year: "2023"  },
       
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/03/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "March",
+#       year: "2023"  },
 
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/04/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "April",
+#       year: "2023"  },
       
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/05/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "May",
+#       year: "2023"  },
       
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/06/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "June",
+#       year: "2023"  },
 
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/07/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "July",
+#       year: "2023"  },
       
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/08/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "August",
+#       year: "2023"  },
       
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/09/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "September",
+#       year: "2023"  },
 
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/10/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "October",
+#       year: "2023"  },
       
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/11/01", },
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "November",
+#       year: "2023"  },
       
-      { user_id: carlo_user.id,
-      amount: 50,
-      month: "2024/12/01", },
-  ]
-)
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "December",
+#       year: "2023"  },
+#   ]
+# )
 
 puts "Creating claim request type..."
-ClaimRequestType.create(
+ClaimRequestType.create!(
   [
     { name: "Hospitalization",
       amount: "5000" },
@@ -363,7 +400,7 @@ ClaimRequestType.create(
 # )
 
 puts "Creating sales category..."
-SalesCategory.create(
+SalesCategory.create!(
   [
     { name: "Canteen Sales"},
 
@@ -389,7 +426,7 @@ SalesCategory.create(
   ]
 )
 
-puts "Creating daily sale category..."
+puts "Creating daily sales category..."
 canteen_sales_category = SalesCategory.find_by(name: "Canteen Sales")
 softdrinks_category = SalesCategory.find_by(name: "Softdrinks")
 mineral_category = SalesCategory.find_by(name: "Mineral Income")
@@ -402,8 +439,8 @@ transportation_category = SalesCategory.find_by(name: "Transportation")
 # misc_repair_category = SalesCategory.find_by(name: "Misc/Repair")
 cash_deposit_category = SalesCategory.find_by(name: "Cash Deposit")
 
-puts "Creating daily sale..."
-DailySale.create(
+puts "Creating daily sales..."
+DailySale.create!(
   [
     { sales_category_id: canteen_sales_category.id,
     amount: "5433",
@@ -419,4 +456,103 @@ DailySale.create(
   ]
 )
 
+puts "Creating expenses category..."
+ExpenseCategory.create!(
+  [
+    { name: "Electricity"},
+  ]
+)
+puts "Creating daily expenses category..."
+electricity_expenses_category = ExpenseCategory.find_by(name: "Electricity")
+
+puts "Creating daily expenses..."
+DailyExpense.create!(
+  [
+    { expense_category_id: electricity_expenses_category.id,
+    amount: "15000",
+    expense_date: "10/08/2024" },
+  ]
+)
+
+puts "Creating stalls..."
+Stall.create!(
+  [
+    { name: "Shen's Corner"},
+
+    { name: "Shakit"},
+
+    { name: "May Lemon"},
+
+    { name: "Snack Bar"},
+
+    { name: "Grace Corner"},
+
+    { name: "Sisig Corner"},
+
+    { name: "Aida's Corner"},
+
+    { name: "Cakefrost"},
+
+    { name: "Ebak Stall"},
+
+    { name: "Edward"},
+  ]
+)
+
+puts "Creating stalls category..."
+shens_corner_stall = Stall.find_by(name: "Shen's Corner")
+shakit_stall = Stall.find_by(name: "Shakit")
+may_lemon_stall = Stall.find_by(name: "May Lemon")
+snack_bar_stall = Stall.find_by(name: "Snack Bar")
+grace_corner_stall = Stall.find_by(name: "Grace Corner")
+sisig_corner_stall = Stall.find_by(name: "Sisig Corner")
+aidas_corner_stall = Stall.find_by(name: "Aida's Corner")
+cake_frost_stall = Stall.find_by(name: "Cakefrost")
+ebak_stall = Stall.find_by(name: "Ebak Stall")
+edward_stall = Stall.find_by(name: "Edward")
+
+puts "Creating tenants..."
+Tenant.create!(
+  [
+    { first_name: "Juan",
+    middle_name: "Dela",
+    last_name: "Cruz" },
+
+    { first_name: "Shen",
+    middle_name: "Delos",
+    last_name: "Reyes" },
+
+    { first_name: "Sha",
+    middle_name: "Lee",
+    last_name: "Kit" },
+
+    { first_name: "May",
+    middle_name: "Lee",
+    last_name: "Mon" },
+
+    { first_name: "Snack",
+    middle_name: "Tee",
+    last_name: "Bar" },
+
+    { first_name: "Grace",
+    middle_name: "Valenzuela",
+    last_name: "Corner" },
+
+    { first_name: "Sisig",
+    middle_name: "Bautista",
+    last_name: "Corner" },
+
+    { first_name: "Aida",
+    middle_name: "Santos",
+    last_name: "Corner" },
+
+    { first_name: "Cake",
+    middle_name: "Gonzales",
+    last_name: "Frost" },
+
+    { first_name: "Edward",
+    middle_name: "Rivera",
+    last_name: "De Leon" },
+  ]
+)
 puts "Seeding complete."

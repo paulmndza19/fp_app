@@ -10,8 +10,8 @@ class LateTenantDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     first_name: Field::String,
-    last_name: Field::String,
     middle_name: Field::String,
+    last_name: Field::String,
     stall_rentals: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -26,8 +26,8 @@ class LateTenantDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     first_name
-    last_name
     middle_name
+    last_name
     last_payment
   ].freeze
 
@@ -36,8 +36,8 @@ class LateTenantDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     first_name
-    last_name
     middle_name
+    last_name
     stall_rentals
     created_at
     updated_at
@@ -48,8 +48,8 @@ class LateTenantDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     first_name
-    last_name
     middle_name
+    last_name
     stall_rentals
   ].freeze
 

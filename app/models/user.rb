@@ -11,7 +11,17 @@ class User < ApplicationRecord
   has_many :contributions
   has_many :claim_requests
 
-  before_validation :set_member_id, on: :create
+  # def unpaid_dues?
+  #   # Logic to determine if the member has unpaid dues
+  #   contributions_count > 0
+  # end
+
+  # def contributions_count
+  #   # Logic to count member's contributions
+  #   contributions.size
+  # end
+
+  # before_validation :set_member_id, on: :create
 
   validates :member_id_number, uniqueness: true, on: :create
 
@@ -29,8 +39,16 @@ class User < ApplicationRecord
     role.name.downcase == 'member'
   end
 
+  def is_president?
+    role.name.downcase == 'president'
+  end
+
   def is_secretary?
     role.name.downcase == 'secretary'
+  end
+
+  def is_auditor?
+    role.name.downcase == 'auditor'
   end
 
   private

@@ -50,19 +50,13 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  namespace :secretary do
-    resources :users
-
-    root to: "home#index"
-  end
 
   root to: "home#index"
   get "/dashboard", to: "home#dashboard"
 
   get "/bylaws", to: "bylaws#index"
-
-  get "/users", to: "roles#index"
   
   get "/sales", to: "sales#index"
+  
   get "/expenses", to: "expenses#index"
 end

@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-4">
   <!-- ===== First Row Start ===== -->
   <div class="flex justify-between space-x-6 mx-6 mt-12">
-    <% if @current_user.is_admin? || @current_user.is_secretary? %>
+    <% if @current_user.is_admin? || @current_user.is_secretary? || @current_user.is_auditor? || @current_user.is_president? %>
   <div class="parent-container">
       <!-- ===== Your Total Contributions Start ===== -->
       <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
@@ -57,7 +57,7 @@
         <div class="px-6 py-4">
           <div class="mb-2 text-gray-500 text-sm">Last Posted Contributionㅤㅤ</div>
           <p class="text-gray-700 text-base font-bold text-xl">
-            <%= @your_last_contribution ? "#{@your_last_contribution.month&.strftime('%B')} #{@your_last_contribution.month&.strftime('%Y')}" : "N/A" %>
+            <%= @your_last_contribution ? "#{@your_last_contribution.month.strftime("%B, %Y")}" : "N/A" %>
           </p>
         </div>
       </div>
@@ -66,7 +66,7 @@
     </div>
     <!-- ===== First Row End ===== -->
 
-
+    <% if @current_user.is_admin? || @current_user.is_secretary? || @current_user.is_president?  %>
     <!-- ===== 2nd Row Start ===== -->
     <div class="flex justify-between space-x-6 mx-6 mt-12">
     
@@ -90,10 +90,11 @@
           </div>
         </div>
       </div>
+    <% end %>
     <!-- ===== User Count End ===== -->
     <% end %>
 
-    <% if @current_user.is_admin? %>
+    <% if @current_user.is_admin? || @current_user.is_president? %>
     <!-- ===== Total Contributions Start ===== -->
       <div class="max-w-sm flex rounded overflow-hidden shadow-lg bg-white p-4">
         <div class="py-4 px-6">
@@ -194,7 +195,7 @@
       <div class="px-6 py-4">
         <div class=" mb-2 text-gray-500 text-sm">Last Posted Contribution</div>
         <p class="text-gray-700 text-base font-bold text-xl">
-          <%= @your_last_contribution ? "#{@your_last_contribution.month} #{@your_last_contribution.year}" : "N/A" %>
+          <%= @your_last_contribution ? "#{@your_last_contribution.month.strftime("%B, %Y")}" : "N/A" %>
         </p>
       </div>
     </div>
@@ -210,7 +211,7 @@
   
   <!-- ===== Second Row Start ===== -->
   <div class="flex justify-left align-center mt-12">
-    <% if @current_user.is_admin? %>
+    <% if @current_user.is_admin? || @current_user.is_president? %>
       <div class="flex w-full rounded overflow-hidden shadow-lg bg-white mx-6">
         <div class=" w-full">
           <div class="px-6 py-4 bg-blue-100 text-xl font-semibold mb-2 py-2 text-black border-b"> 
@@ -263,14 +264,14 @@
                     <div class="flex">
                       <div class="ml-3">
                         <p class="text-gray-900 whitespace-no-wrap">
-                          <%= contribution.month&.strftime('%B') %>
+                          <%= contribution.month.strftime("%B") %>
                         </p>
                         <p class="text-gray-600 whitespace-no-wrap"><%= contribution.receipt_number %></p>
                       </div>
                     </div>
                   </td>
                   <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p class="text-gray-900 whitespace-no-wrap"><%= contribution.month&.strftime('%Y') %></p>
+                    <p class="text-gray-900 whitespace-no-wrap"><%= contribution.month.strftime("%Y") %></p>
                   </td>
                   <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p class="text-gray-900 whitespace-no-wrap">

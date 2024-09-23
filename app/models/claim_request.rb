@@ -14,4 +14,50 @@ class ClaimRequest < ApplicationRecord
   def type
     claim_request_type.name
   end
+
+    # Validate on create
+    validate :one_claim_per_year
+    validate :no_unpaid_dues
+    validate :sufficient_contributions
+
+    private
+    # # Check if the member already received a claim in the current year
+    # def one_claim_per_year
+    #   current_year = Time.current.year
+    #   # Find claims for the current member within the current year
+    #   existing_claim = ClaimRequest.where(user_id: user.id)
+    #                               .where('extract(year from created_at) = ?', current_year)
+    #                               .exists?
+
+    #   if existing_claim
+    #     errors.add(:base, "You have already received a claim this year. You can only request another claim next year.")
+    #   end
+    # end
+
+    # Check if the member already received a claim in the current year
+    def one_claim_per_year
+      current_year_claims = ClaimRequest.where(user_id: user.id, created_at: Time.current.beginning_of_year..Time.current.end_of_year)
+      if current_year_claims.exists?
+        errors.add(:base, "You have already received a claim this year. You can only request another claim next year.")
+      end
+    end
+
+    # Check if the member has unpaid contribution dues
+    def no_unpaid_dues
+      if user.unpaid_dues?
+        errors.add(:base, "You have unpaid contribution dues. Please settle them before making a claim request.")
+      end
+    end
+
+    # Check if the member has made enough contributions
+    def sufficient_contributions
+      if user.contributions_count < required_contributions_count
+        errors.add(:base, "You need to make more contributions before you can request a claim.")
+      end
+    end
+
+    # Define the required number of contributions (adjust as necessary)
+    def required_contributions_count
+      5 # Example: require at least 5 contributions to be eligible
+    end
 end
