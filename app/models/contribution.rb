@@ -1,4 +1,7 @@
 class Contribution < ApplicationRecord
+  has_paper_trail
+  acts_as_paranoid
+  
   paginates_per 10
 
   default_scope { order(created_at: :desc) }
@@ -12,7 +15,7 @@ class Contribution < ApplicationRecord
 
   # before_validation :set_receipt_number
 
-  validates :receipt_number, uniqueness: true, presence: true
+  validates :receipt_number, presence: true
 
   belongs_to :user
 

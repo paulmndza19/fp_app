@@ -78,7 +78,7 @@
                       <span class="relative">Pending</span>
                     </span>
                   <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p class="text-gray-900 whitespace-no-wrap"><%= request.remarks %></p>
+                    <p class="text-gray-900 whitespace-no-wrap"><%= request.remarks || "No remarks yet." %></p>
                   </td>
                   <% elsif request.status.downcase == 'approved' %>
                     <span
@@ -91,7 +91,7 @@
                       <span class="relative">Approved</span>
                     </span>
                   <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p class="text-gray-900 whitespace-no-wrap"><%= request.remarks %></p>
+                    <p class="text-gray-900 whitespace-no-wrap"><%= request.remarks || "No remarks yet." %></p>
                   </td>
                   <% elsif request.status.downcase == 'rejected' %>
                     <span
@@ -104,7 +104,7 @@
                       <span class="relative">Rejected</span>
                     </span>
                   <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p class="text-gray-900 whitespace-no-wrap"><%= request.remarks %></p>
+                    <p class="text-gray-900 whitespace-no-wrap"><%= request.remarks || "No remarks yet." %></p> 
                   </td>
                   <% end %>
                 </td>

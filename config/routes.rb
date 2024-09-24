@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       edit
       update
       show
+    
     ]
     resources :membership_fees, except: %i[edit update destroy]
     resources :sales_categories
@@ -40,13 +41,22 @@ Rails.application.routes.draw do
 
     resources :audit_trails, only: [:index], path: :activity_log
 
+    resources :archives, only: [:index] do 
+      member do
+        put :restore
+      end
+    end
+    put "/archives/:id/restore", to: "archives#restore"
+
     root to: "contributions#index"
+    
   end
   
   resources :contributions
   resources :claim_requests, only: [:index, :new, :create]
   resources :audit_trails, only: [:index], path: :activity_log
   resources :archives, only: [:index]
+
 
   devise_for :users
 

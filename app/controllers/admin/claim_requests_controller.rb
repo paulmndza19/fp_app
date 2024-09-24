@@ -5,7 +5,6 @@ module Admin
     #
     def update
       super
-      binding.pry
       if params[:claim_request][:status] == 'Approved'
         ClaimRequestUpdateMailer.approval_email(requested_resource).deliver_now
       else

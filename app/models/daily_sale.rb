@@ -1,4 +1,7 @@
 class DailySale < ApplicationRecord
+  has_paper_trail
+  acts_as_paranoid
+  
   paginates_per 10
   default_scope { order(sales_date: :desc) }
 

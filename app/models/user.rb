@@ -51,6 +51,10 @@ class User < ApplicationRecord
     role.name.downcase == 'auditor'
   end
 
+  def last_contribution_month
+    contributions.order(created_at: :desc).limit(1).first&.month&.strftime("%B %Y") || "N/A"
+  end
+
   private
 
   def set_member_id

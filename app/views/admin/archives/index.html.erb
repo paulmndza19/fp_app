@@ -1,7 +1,7 @@
 <div class="container mx-auto px-4 sm:px-8">
   <div class="py-8">
     <div class="flex justify-between">
-      <h2 class="text-2xl font-semibold leading-tight">Activity Log</h2>
+      <h2 class="text-2xl font-semibold leading-tight">Archive</h2>
     </div>
     <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
       <div
@@ -23,57 +23,36 @@
               <th
                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
               >
-                Event
-              </th>
-              <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
-              >
-                Changes
-              </th>
-              <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
-              >
                 Timestamp (UTC)
+              </th>
+                            <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+              >
+                <%# Title %>
               </th>
             </tr>
           </thead>
           <tbody>
-            <% @versions.each do |version| %>
+            <% @archives.each do |archive| %>
               <tr>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <div class="flex">
                     <div class="ml-3">
                       <p class="text-gray-900 whitespace-no-wrap">
-                        <%= version.item_type.underscore.humanize %>
+                        <%= archive.item_type.underscore.humanize %>
                       </p>
                     </div>
                   </div>
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap"><%= version.item_id %></p>
+                  <p class="text-gray-900 whitespace-no-wrap"><%= archive.item_id %></p>
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">
-                    <%= version.event %>
-                  </p>
+                  <p class="text-gray-900 whitespace-no-wrap"><%= archive.created_at.strftime('%B %d, %Y %H:%M') %></p>
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">
-                    <% if version.event == "update" %>
-                      <ul>
-                          <% changeset = version.changeset %>
-                          <% changeset.delete("updated_at") %>
-                          <% changeset&.each do |key, value| %>
-                              <li> <%= "#{key}: #{value.first} -> #{value.last}" %> </li>
-                          <% end %>
-                      </ul>
-                     <% else version.event %>
-                        N/A
-                    <% end %>
-                  </p>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap"><%= version.created_at.strftime('%B %d, %Y %H:%M') %></p>
+                  
+                  <%= link_to 'Restore', restore_admin_archive_path(archive), data: { "turbo-method": :put }, class: "button bg-success flex cursor-pointer items-center justify-center gap-2 rounded px-2 py-1 text-base font-medium text-white hover:bg-opacity-80 xsm:px-4" %>
                 </td>
               </tr>
             <% end %>
@@ -81,7 +60,7 @@
         </table>
 
         <div class="py-4">
-          <%= paginate @versions, outer_window: 3, left: 1, right: 3 %>
+          <%= paginate @archives, outer_window: 3, left: 1, right: 3 %>
         </div>
       </div>
     </div>

@@ -44,7 +44,8 @@ class UserDashboard < Administrate::BaseDashboard
     no_of_children: Field::Number,
     parent_name: Field::String,
     office: Field::Select.with_options(collection: [nil, 'Faculty', 'Admin']),
-    full_time: Field::Boolean
+    full_time: Field::Boolean,
+    last_contribution_month: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -59,6 +60,7 @@ class UserDashboard < Administrate::BaseDashboard
     email
     birthday
     role
+    last_contribution_month
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -80,6 +82,7 @@ class UserDashboard < Administrate::BaseDashboard
     role
     created_at
     updated_at
+    last_contribution_month
   ].freeze
 
   # FORM_ATTRIBUTES
