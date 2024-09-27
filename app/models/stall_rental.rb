@@ -8,6 +8,8 @@ class StallRental < ApplicationRecord
   has_many :rental_payments
 
   def display_name
-    "#{tenant.name} - #{stall.name}"
+    tenant_name = tenant&.name.presence || "N/A"
+    stall_name = stall&.name.presence || "N/A"
+    "#{tenant_name} - #{stall_name}"
   end
 end

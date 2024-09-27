@@ -8,7 +8,7 @@ class LateTenantDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
+    id: Field::String,
     first_name: Field::String,
     middle_name: Field::String,
     last_name: Field::String,
@@ -24,7 +24,6 @@ class LateTenantDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     first_name
     middle_name
     last_name

@@ -8,7 +8,7 @@ class DailySaleDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
+    id: Field::String,
     amount: Field::Number.with_options(
       prefix: "₱",
       decimals: 2,
@@ -25,7 +25,6 @@ class DailySaleDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     amount
     sales_category
     sales_date

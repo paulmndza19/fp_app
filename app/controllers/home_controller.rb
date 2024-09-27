@@ -19,7 +19,7 @@ class HomeController < ApplicationController
   # @last_posted_contribution = "#{current_month}-#{current_year}"
 
   def dashboard
-    @contributions = Contribution.includes(:user).order(created_at: :desc).limit(5)
+    @contributions = Contribution.joins(:user).where(user: { deleted_at: nil }).order(created_at: :desc).limit(5)
     @user_count = User.count
     @total_contributions = Contribution.sum(:amount)
     @total_number_contributions = Contribution.count
