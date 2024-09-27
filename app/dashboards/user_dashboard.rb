@@ -124,4 +124,9 @@ class UserDashboard < Administrate::BaseDashboard
   def display_resource(user)
     "#{user.name}"
   end
+
+  def search_attributes
+    # Return an array of attributes that should be searchable
+    super - [:last_contribution_month]
+  end
 end
