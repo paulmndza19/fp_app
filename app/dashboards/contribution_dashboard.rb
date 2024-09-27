@@ -22,8 +22,8 @@ class ContributionDashboard < Administrate::BaseDashboard
       prefix: "₱",
       decimals: 2,
     ),
-    formatted_month: Field::String,
-    month: Field::Date,
+    # formatted_month: Field::String,
+    month: Field::Date.with_options(format: '%B %Y'),
     date_from: Field::Date,
     date_to: Field::Date,
     user: Field::BelongsTo,
@@ -44,7 +44,7 @@ class ContributionDashboard < Administrate::BaseDashboard
     receipt_number
     user
     amount
-    formatted_month
+    month
     document
   ].freeze
 
