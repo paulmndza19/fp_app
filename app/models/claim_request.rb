@@ -1,4 +1,13 @@
 class ClaimRequest < ApplicationRecord
+  include AlgoliaSearch
+
+  algoliasearch do
+    attribute :type, :name, :status
+    # Add other configuration options if needed
+  end
+
+  delegate :name, to: :user
+
   has_paper_trail
   acts_as_paranoid
 
@@ -6,9 +15,6 @@ class ClaimRequest < ApplicationRecord
 
   belongs_to :user
   belongs_to :claim_request_type
-
-  has_paper_trail
-  acts_as_paranoid
 
   has_one_attached :document
 

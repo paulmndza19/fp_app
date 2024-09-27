@@ -1,8 +1,14 @@
 class User < ApplicationRecord
+  include AlgoliaSearch
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_paper_trail
   acts_as_paranoid
+
+  algoliasearch do
+    attribute :first_name, :last_name, :email, :member_id_number
+    # Add other configuration options if needed
+  end
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

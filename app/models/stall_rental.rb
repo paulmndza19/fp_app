@@ -1,7 +1,14 @@
 class StallRental < ApplicationRecord
+  include AlgoliaSearch
+
+  algoliasearch do
+    attribute :display_name
+    # Add other configuration options if needed
+  end
+
   has_paper_trail
   acts_as_paranoid
-  
+
   belongs_to :tenant
   belongs_to :stall
 

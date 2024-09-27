@@ -3,6 +3,31 @@ module Admin
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
+    #
+    def index
+      search_term = params[:search].to_s.strip
+
+      if search_term.present?
+        # Perform search with Algolia
+        algolia_results = ClaimRequest.algolia_search(search_term)
+        resource_ids = algolia_results.map(&:id)
+        resources = ClaimRequest.where(id: resource_ids).page(params[:page]).per(records_per_page)
+      else
+        # Fallback to showing all resources if no search term is provided
+        resources = ClaimRequest.page(params[:page]).per(records_per_page)
+      end
+
+      page = Administrate::Page::Collection.new(dashboard, order: order)
+
+      render locals: {
+        resources: resources,
+        search_term: search_term,
+        page: page,
+        show_search_bar: true
+      }
+    end
+
+
     def update
       super
       if params[:claim_request][:status] == 'Approved'

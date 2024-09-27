@@ -1,13 +1,19 @@
 class Contribution < ApplicationRecord
+  include AlgoliaSearch
+
+  algoliasearch do
+    attribute :receipt_number, :name
+    # Add other configuration options if needed
+  end
+
+  delegate :name, to: :user
+
   has_paper_trail
   acts_as_paranoid
-  
+
   paginates_per 10
 
   default_scope { order(created_at: :desc) }
-
-  has_paper_trail
-  acts_as_paranoid
 
   has_one_attached :document
 

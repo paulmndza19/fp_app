@@ -56,6 +56,10 @@ class MembershipFeeDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
+  def self.search(query)
+    User.algolia_search(query).map(&:object_id)
+  end
+
   # Overwrite this method to customize how membership fees are displayed
   # across all pages of the admin dashboard.
   #

@@ -3,6 +3,30 @@ module Admin
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
+    #
+    def index
+      search_term = params[:search].to_s.strip
+
+      if search_term.present?
+        # Perform search with Algolia
+        algolia_results = Contribution.algolia_search(search_term)
+        resource_ids = algolia_results.map(&:id)
+        resources = Contribution.where(id: resource_ids).page(params[:page]).per(records_per_page)
+      else
+        # Fallback to showing all resources if no search term is provided
+        resources = Contribution.page(params[:page]).per(records_per_page)
+      end
+
+      page = Administrate::Page::Collection.new(dashboard, order: order)
+
+      render locals: {
+        resources: resources,
+        search_term: search_term,
+        page: page,
+        show_search_bar: true
+      }
+    end
+
     def create
       date_from = Date.parse(resource_params["date_from"])
       date_to = Date.parse(resource_params["date_to"])
@@ -16,9 +40,9 @@ module Admin
             amount: resource_params["amount"],
             month: date,
             document: resource_params["document"],
-            receipt_number: resource_params["receipt_number"] 
+            receipt_number: resource_params["receipt_number"]
           )
-        end 
+        end
         redirect_to action: "index"
       end
     end
@@ -56,7 +80,7 @@ module Admin
     # and `dashboard`:
     #
      def resource_params
-       params.require(:contribution).permit(:user_id, :amount, :date_from, :date_to, :receipt_number, :document) 
+       params.require(:contribution).permit(:user_id, :amount, :date_from, :date_to, :receipt_number, :document)
         #  permit(dashboard.permitted_attributes(action_name)).
         #  transform_values { |value| value == "" ? nil : value }
      end

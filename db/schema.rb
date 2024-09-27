@@ -42,6 +42,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_120831) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "category_names", id: false, force: :cascade do |t|
+    t.text "string_agg"
+  end
+
   create_table "claim_request_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -75,8 +79,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_120831) do
     t.index ["user_id"], name: "index_contributions_on_user_id"
   end
 
-  create_table "daily_expenses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "expense_category_id", null: false
+  create_table "daily_expenses", force: :cascade do |t|
+    t.bigint "expense_category_id", null: false
     t.decimal "amount"
     t.date "expense_date"
     t.datetime "created_at", null: false
@@ -85,8 +89,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_120831) do
     t.index ["expense_category_id"], name: "index_daily_expenses_on_expense_category_id"
   end
 
-  create_table "daily_sales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "sales_category_id", null: false
+  create_table "daily_sales", force: :cascade do |t|
+    t.bigint "sales_category_id", null: false
     t.decimal "amount"
     t.date "sales_date"
     t.datetime "created_at", null: false
@@ -95,14 +99,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_120831) do
     t.index ["sales_category_id"], name: "index_daily_sales_on_sales_category_id"
   end
 
-  create_table "expense_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "expense_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
   end
 
-  create_table "membership_fees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "membership_fees", force: :cascade do |t|
     t.uuid "user_id", null: false
     t.decimal "amount"
     t.datetime "created_at", null: false
@@ -111,8 +115,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_120831) do
     t.index ["user_id"], name: "index_membership_fees_on_user_id"
   end
 
-  create_table "rental_payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "stall_rental_id", null: false
+  create_table "rental_payments", force: :cascade do |t|
+    t.bigint "stall_rental_id", null: false
     t.decimal "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -128,16 +132,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_120831) do
     t.index ["name"], name: "index_roles_on_name", unique: true
   end
 
-  create_table "sales_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "sales_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
   end
 
-  create_table "stall_rentals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "tenant_id", null: false
-    t.uuid "stall_id", null: false
+  create_table "stall_rentals", force: :cascade do |t|
+    t.bigint "tenant_id", null: false
+    t.bigint "stall_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -145,14 +149,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_120831) do
     t.index ["tenant_id"], name: "index_stall_rentals_on_tenant_id"
   end
 
-  create_table "stalls", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "stalls", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
   end
 
-  create_table "tenants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "tenants", force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"

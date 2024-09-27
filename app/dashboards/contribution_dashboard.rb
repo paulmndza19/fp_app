@@ -87,10 +87,14 @@ class ContributionDashboard < Administrate::BaseDashboard
     receipt_number: -> (resources, attr) {resources.where(receipt_number: attr)}
   }.freeze
 
+  def self.search(query)
+    Contribution.algolia_search(query).map(&:object_id)
+  end
+
   # Overwrite this method to customize how contributions are displayed
   # across all pages of the admin dashboard.
   #
   def display_resource(contribution)
-    "#{contribution.user.name} #{contribution.month.strftime("%B")} #{contribution.month.strftime("%Y")} Contribution"
+    "#{contribution&.user&.name} #{contribution.month&.strftime("%B")} #{contribution.month&.strftime("%Y")} Contribution"
   end
 end

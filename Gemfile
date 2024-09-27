@@ -103,3 +103,5 @@ gem 'kaminari'
 gem 'whenever', require: false
 # XLSX
 gem 'caxlsx'
+# Search
+gem 'algoliasearch-rails'
