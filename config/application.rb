@@ -22,5 +22,7 @@ module Rails7DeviseExample
     # config.eager_load_paths << Rails.root.join("extras")
     config.assets.css_compressor = nil
     config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, BigDecimal, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
+    config.time_zone = 'Asia/Manila'
+    config.active_record.default_timezone = :utc
   end
 end

@@ -12,4 +12,5 @@ class MembershipFee < ApplicationRecord
   belongs_to :user
 
   delegate :name, to: :user
+  validates :amount, presence: true
 end

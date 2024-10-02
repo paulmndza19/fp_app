@@ -23,7 +23,7 @@
               <th
                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
               >
-                Timestamp (UTC)
+                Timestamp (PST)
               </th>
             </tr>
           </thead>
@@ -43,7 +43,10 @@
                   <p class="text-gray-900 whitespace-no-wrap"><%= archive.item_id %></p>
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap"><%= archive.created_at.strftime('%B %d, %Y %H:%M') %></p>
+                  <p class="text-gray-900 whitespace-no-wrap"><%= version.created_at.in_time_zone.strftime("%B %d, %Y %I:%M %p") %></p>
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">            
+                  <%= link_to 'Restore', restore_admin_archive_path(archive), data: { "turbo-confirm": 'Are you sure?', "turbo-method": :put }, method: :put, class: "button bg-success flex cursor-pointer items-center justify-center gap-2 rounded px-2 py-1 text-base font-medium text-white hover:bg-opacity-80 xsm:px-4" %>   
                 </td>
               </tr>
             <% end %>

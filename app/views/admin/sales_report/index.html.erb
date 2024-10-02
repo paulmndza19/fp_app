@@ -7,10 +7,10 @@
     <%= form_tag admin_sales_reports_path, method: :get, class: 'month-selector-form', id: 'sales-report-form' do %>
       <div class="flex gap-4">
         <label class="text-xl py-3">Select a Month:</label>
-        <select name="month" id="category-select">
+        <select name="month" id="sales-month-select">
             <option> Select month </option>
           <% (1..12).each do |month| %>
-            <option value="<%= "#{Date.today.year}-#{'%02d' % month}" %>" <%= 'selected' if params[:month] == "#{Date.today.year}-#{'%02d' % month}" %>>
+            <option value="<%= "#{Date.today.year}-#{'%02d' % month}" %>" <%= params[:month].present? ? params[:month] == "#{Date.today.year}-#{'%02d' % month}" && 'selected' : "#{Date.today.year}-#{'%02d' % Date.today.month}" == "#{Date.today.year}-#{'%02d' % month}" && 'selected' %>>
               <%= Date::MONTHNAMES[month] %> <%= Date.today.year %>
             </option>
           <% end %>
@@ -63,13 +63,11 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-  var selectElement = document.getElementById('category-select');
+  var selectElement = document.getElementById('sales-month-select');
   var formElement = document.getElementById('sales-report-form');
 
   selectElement.addEventListener('change', function() {
     //alert("kahit anu");
     formElement.submit();
   });
-});
 </script>

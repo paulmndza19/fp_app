@@ -1,0 +1,8 @@
+<div class="field-unit">
+  <%= f.label field.attribute %>
+  <%= if controller.action_name == 'edit'
+        f.text_field field.attribute, value: field.data.name, disabled: true
+      else
+        f.text_field field.attribute, value: field.data.name
+      end %>
+</div>

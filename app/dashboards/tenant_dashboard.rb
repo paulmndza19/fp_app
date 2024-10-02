@@ -62,6 +62,6 @@ class TenantDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(tenant)
-    "Tenant #{tenant.name}"
+    tenant.name
   end
 end

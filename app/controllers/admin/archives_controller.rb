@@ -20,6 +20,8 @@ module Admin
 
       @version.destroy
       record.update(deleted_at: nil)
+
+      redirect_to admin_archives_path, notice: 'Archive restored successfully.'
     end
 
     private

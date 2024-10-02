@@ -61,7 +61,12 @@ Rails.application.routes.draw do
   devise_for :users
 
 
+  # root to: "sign_in#index"
+
+  # get "/home", to: "home#index"
+
   root to: "home#index"
+  
   get "/dashboard", to: "home#dashboard"
 
   get "/bylaws", to: "bylaws#index"

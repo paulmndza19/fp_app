@@ -82,7 +82,7 @@ module Admin
         SELECT
           COALESCE(TO_CHAR(DATE(ds.sales_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
           SUM(ds.amount) + COALESCE(SUM(rp.amount), 0) AS \"Total Sales\",
-          COALESCE(SUM(es.amount), 0) AS \"Total Expenses\",
+          COALESCE(SUM(DISTINCT es.amount), 0) AS \"Total Expenses\",
           (SUM(ds.amount) + COALESCE(SUM(rp.amount), 0)) -  COALESCE(SUM(es.amount), 0) AS \"Total Income\"
         FROM
           daily_sales ds

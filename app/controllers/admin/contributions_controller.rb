@@ -26,25 +26,70 @@ module Admin
         show_search_bar: true
       }
     end
-
+    
     def create
+      if resource_params["date_from"].empty?
+        dummy_contribution = Contribution.new
+        dummy_contribution.errors.add(:base, "Date from value should be supplied")
+
+        render :new, locals: {
+                    page: Administrate::Page::Form.new(dashboard, dummy_contribution)
+                  }, status: :unprocessable_entity
+        return
+      end
+
+      if resource_params["date_to"].empty?
+        dummy_contribution = Contribution.new
+        dummy_contribution.errors.add(:base, "Date to value should be supplied")
+
+        render :new, locals: {
+                    page: Administrate::Page::Form.new(dashboard, dummy_contribution)
+                  }, status: :unprocessable_entity
+        return
+      end
+
       date_from = Date.parse(resource_params["date_from"])
       date_to = Date.parse(resource_params["date_to"])
       date_range = date_from..date_to
 
-      date_months = date_range.map{|date| Date.new(date.year, date.month)}.uniq
+      date_months = date_range.map { |date| Date.new(date.year, date.month) }.uniq
+
       ActiveRecord::Base.transaction do
-        date_months.each do |date|
-          Contribution.create!(
+        params_array = date_months.map do |date|
+          {
             user_id: resource_params["user_id"],
             amount: resource_params["amount"],
             month: date,
             document: resource_params["document"],
             receipt_number: resource_params["receipt_number"]
-          )
+          }
         end
-        redirect_to action: "index"
+        
+        if Contribution.where(receipt_number: resource_params['receipt_number']).exists?
+          dummy_contribution = Contribution.new(params_array.first)
+          dummy_contribution.errors.add(:receipt_number, "is invalid or already taken")
+          render :new, locals: {
+                    page: Administrate::Page::Form.new(dashboard, dummy_contribution)
+                  }, status: :unprocessable_entity
+          return
+        end
+
+        params_array.each do |params|
+          contribution = Contribution.new(params)
+          contribution. skip_uniqueness_check = true
+          unless contribution.valid?
+            render :new, locals: {
+              page: Administrate::Page::Form.new(dashboard, contribution)
+            }, status: :unprocessable_entity
+
+            return
+          end
+
+          next if contribution.save
+        end
       end
+
+      redirect_to admin_contributions_path, notice: 'Contributions created successfully.'
     end
 
     def update
@@ -87,5 +132,21 @@ module Admin
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
+
+
+
+    private
+    def check_receipt_number
+      if resource_params["receipt_number"]
+        dummy_contribution.errors.add(:base, "No receipt number.")
+      end
+    end
+
+    def check_amount
+      if resource_params["amount"]
+        dummy_contribution.errors.add(:base, "No amount.")
+      end
+    end
+
   end
 end

@@ -10,10 +10,10 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::String,
     remarks: Field::String,
-    claim_request_type: Field::BelongsTo,
+    claim_request_type: ReadOnlyField,
     deleted_at: Field::DateTime,
     status: Field::Select.with_options(collection: %w[Pending Approved Rejected]),
-    user: Field::BelongsTo,
+    user: ReadOnlyField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     document: Field::ActiveStorage.with_options(index_display_preview: true),

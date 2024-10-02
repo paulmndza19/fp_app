@@ -17,14 +17,15 @@ module Admin
         # Perform search with Algolia
         algolia_results = User.algolia_search(search_term)
         resource_ids = algolia_results.map(&:id)
-        resources = User.where(id: resource_ids).page(params[:page]).per(records_per_page)
+        resources = User.where(id: resource_ids).page(params[:_page]).per(records_per_page)
       else
         # Fallback to showing all resources if no search term is provided
-        resources = User.page(params[:page]).per(records_per_page)
+        resources = User.page(params[:_page]).per(records_per_page)
       end
 
       page = Administrate::Page::Collection.new(dashboard, order: order)
 
+      
       render locals: {
         resources: resources,
         search_term: search_term,

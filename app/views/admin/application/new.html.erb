@@ -34,7 +34,7 @@ to do the heavy lifting.
     <h3 class="font-medium text-black dark:text-white py-1">
       <%= content_for(:title) %>
     </h3>
-    <%= link_to 'Cancel', :back, class: "py-1 px-3 button bg-danger text-white rounded" %>
+    <%= link_to 'Cancel', polymorphic_path([:admin, resource_name.to_s.pluralize.to_sym]), class: "py-1 px-3 button bg-danger text-white rounded" %>
   </div>
   <section class="main-content__body px-6.5 py-6">
     <%= render "form", page: page %>

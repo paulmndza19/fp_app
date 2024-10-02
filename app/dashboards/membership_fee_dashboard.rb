@@ -9,7 +9,10 @@ class MembershipFeeDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::String,
-    amount: Field::String.with_options(searchable: false),
+    amount: Field::Number.with_options(
+      prefix: "₱",
+      decimals: 2,
+    ),
     user: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -21,8 +24,8 @@ class MembershipFeeDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    amount
     user
+    amount
     created_at
   ].freeze
 
@@ -30,8 +33,8 @@ class MembershipFeeDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    amount
     user
+    amount
     created_at
     updated_at
   ].freeze
@@ -40,8 +43,8 @@ class MembershipFeeDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    amount
     user
+    amount
   ].freeze
 
   # COLLECTION_FILTERS

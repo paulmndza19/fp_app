@@ -1,9 +1,9 @@
 class NewClaimRequestMailer < ApplicationMailer
-  default from: 'fpaccess.lspu@gmail.com'
+  default to: 'fpaccess.lspu@gmail.com'
 
   def new_request(claim_request)
     @claim_request = claim_request
     @user = @claim_request.user
-    mail(to: @user.email, subject: 'New Claim Request')
+    mail(from: @user.email, subject: 'New Claim Request')
   end
 end

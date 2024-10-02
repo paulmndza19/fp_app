@@ -3,4 +3,5 @@ class RentalPayment < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :stall_rental
+  validates :amount, presence: true
 end

@@ -21,7 +21,11 @@ class Contribution < ApplicationRecord
 
   # before_validation :set_receipt_number
 
+  attr_accessor :skip_uniqueness_check  
+  validates :receipt_number, uniqueness: true, unless: :skip_uniqueness_check?
   validates :receipt_number, presence: true
+
+  validates :amount, presence: true
 
   belongs_to :user
 
@@ -76,5 +80,9 @@ class Contribution < ApplicationRecord
     return 0 if latest_contribution.nil?
 
     latest_contribution.receipt_number.split("-").last.to_i
+  end
+
+  def skip_uniqueness_check?
+    !!skip_uniqueness_check
   end
 end

@@ -17,6 +17,7 @@ and renders all form fields for a resource's editable attributes.
 
   
 <%= form_for([namespace, page.resource], html: { class: "form" }) do |f| %>
+
   <% if page.resource.errors.any? %>
     <div id="error_explanation">
       <h2>
