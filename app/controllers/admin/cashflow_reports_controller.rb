@@ -81,9 +81,9 @@ module Admin
       report_sql = "
         SELECT
           COALESCE(TO_CHAR(DATE(ds.sales_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
-          SUM(DISTINCT(ds.amount)) + COALESCE(SUM(DISTINCT(rp.total_rental_payments)), 0) AS \"Total Sales\",
-          COALESCE(SUM(DISTINCT es.amount), 0) AS \"Total Expenses\",
-          (SUM(DISTINCT(ds.amount)) + COALESCE(SUM(DISTINCT(rp.total_rental_payments)), 0)) - COALESCE(SUM(DISTINCT es.amount), 0) AS \"Total Income\"
+          SUM((ds.amount)) + COALESCE(SUM(DISTINCT(rp.total_rental_payments)), 0) AS \"Total Sales\",
+          COALESCE(SUM(DISTINCT(es.total_expense)), 0) AS \"Total Expenses\",
+          (SUM((ds.amount)) + COALESCE(SUM(DISTINCT(rp.total_rental_payments)), 0)) - COALESCE(SUM(DISTINCT(es.total_expense)), 0) AS \"Total Income\"
         FROM
           daily_sales ds
         LEFT JOIN (
@@ -93,9 +93,18 @@ module Admin
           FROM
             rental_payments
           GROUP BY
-            DATE(created_at)
+            DATE(rental_payments.created_at)
         ) rp ON DATE(ds.sales_date) = rp.payment_date
-        LEFT JOIN daily_expenses es ON DATE(ds.sales_date) = DATE(es.expense_date)
+        LEFT JOIN (
+          SELECT
+            DATE(de.expense_date) AS payment_date,
+            SUM(amount) as total_expense
+          FROM
+            daily_expenses de
+          JOIN expense_categories ec ON de.expense_category_id = ec.id
+          GROUP BY
+            DATE(de.expense_date)
+        ) es ON DATE(ds.sales_date) = DATE(es.payment_date)
         WHERE ds.sales_date BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
         GROUP BY
           ROLLUP (DATE(ds.sales_date))
