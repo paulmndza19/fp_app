@@ -11,10 +11,13 @@ module Admin
         # Perform search with Algolia
         algolia_results = Contribution.algolia_search(search_term)
         resource_ids = algolia_results.map(&:id)
-        resources = Contribution.where(id: resource_ids).page(params[:page]).per(records_per_page)
+        resources = Contribution.where(id: resource_ids)
+          .includes(:user)
+          .page(params[:page])
+          .per(records_per_page)
       else
         # Fallback to showing all resources if no search term is provided
-        resources = Contribution.page(params[:page]).per(records_per_page)
+        resources = Contribution.includes(:user).page(params[:page]).per(records_per_page)
       end
 
       page = Administrate::Page::Collection.new(dashboard, order: order)
@@ -26,7 +29,7 @@ module Admin
         show_search_bar: true
       }
     end
-    
+
     def create
       if resource_params["date_from"].empty?
         dummy_contribution = Contribution.new
@@ -64,7 +67,7 @@ module Admin
             receipt_number: resource_params["receipt_number"]
           }
         end
-        
+
         if Contribution.where(receipt_number: resource_params['receipt_number']).exists?
           dummy_contribution = Contribution.new(params_array.first)
           dummy_contribution.errors.add(:receipt_number, "is invalid or already taken")

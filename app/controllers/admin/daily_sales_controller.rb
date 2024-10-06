@@ -15,10 +15,10 @@ module Admin
         # Perform search with Algolia
         algolia_results = DailySale.algolia_search(search_term)
         resource_ids = algolia_results.map(&:id)
-        resources = DailySale.where(id: resource_ids).page(params[:page]).per(records_per_page)
+        resources = DailySale.where(id: resource_ids).includes(:sales_category).page(params[:page]).per(records_per_page)
       else
         # Fallback to showing all resources if no search term is provided
-        resources = DailySale.page(params[:page]).per(records_per_page)
+        resources = DailySale.includes(:sales_category).page(params[:page]).per(records_per_page)
       end
 
       page = Administrate::Page::Collection.new(dashboard, order: order)
