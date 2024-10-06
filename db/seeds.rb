@@ -23,7 +23,7 @@ auditor = Role.create!(name: 'Auditor')
 
 puts "Creating users..."
 User.create!(
-  
+  member_id_number: "0124-001",
   email: "testuser@gmail.com",
   first_name: "Mia",
   last_name: "Villarica",
@@ -33,6 +33,7 @@ User.create!(
 )
 
 User.create!(
+  member_id_number: "0124-002",
   email: "testpres@gmail.com",
   first_name: "Ray Samuel",
   last_name: "Grecalda",
@@ -42,6 +43,7 @@ User.create!(
 )
 
 User.create!(
+  member_id_number: "0124-003",
   email: "testsec@gmail.com",
   first_name: "Jean",
   last_name: "Cabela",
@@ -51,6 +53,7 @@ User.create!(
 )
 
 User.create!(
+  member_id_number: "0124-004",
   email: "testaudit@gmail.com",
   first_name: "Marie Ann",
   last_name: "Gonzales",
@@ -62,7 +65,8 @@ User.create!(
 User.create!(
   [
     # member_1
-    { email: "crlxltbr@gmail.com",
+    { member_id_number: "0124-005",
+      email: "crlxltbr@gmail.com",
       first_name: "Jesse Carlo",
       last_name: "Altobar",
       password: "member1",
@@ -70,7 +74,8 @@ User.create!(
       role_id: member.id },
 
     # member_2
-    { email: "yurieduria2@gmail.com",
+    { member_id_number: "0124-006",
+      email: "yurieduria2@gmail.com",
       first_name: "John Angelo",
       last_name: "Eduria",
       password: "member2",
@@ -78,7 +83,8 @@ User.create!(
       role_id: member.id },
 
     # member_3
-    { email: "galitaugustus@gmail.com",
+    { member_id_number: "0124-007",
+      email: "galitaugustus@gmail.com",
       first_name: "Augustus Jeshua",
       last_name: "Galit",
       password: "member3",
@@ -86,7 +92,8 @@ User.create!(
       role_id: member.id },
 
     # member_4
-    { email: "charmaine.brigaiz@gmail.com",
+    { member_id_number: "0124-008",
+      email: "charmaine.brigaiz@gmail.com",
       first_name: "Charmaine",
       last_name: "Brigaiz",
       password: "password",
@@ -94,7 +101,8 @@ User.create!(
       role_id: member.id },
 
     # member_5
-    { email: "jericjames.alejo@gmail.com",
+    { member_id_number: "0124-009",
+      email: "jericjames.alejo@gmail.com",
       first_name: "Jeric James",
       last_name: "Alejo",
       password: "password",
@@ -102,15 +110,17 @@ User.create!(
       role_id: member.id },
 
     # member_6
-    { email: "laureenmiranda@gmail.com",
+    { member_id_number: "0124-010",
+      email: "laureenmiranda@gmail.com",
       first_name: "Maria Laureen",
       last_name: "Miranda",
       password: "password",
       birthday: "06/09/1986",
       role_id: member.id },
-    
+
     # member_7
-    { email: "markbernardino@gmail.com",
+    { member_id_number: "0124-011",
+      email: "markbernardino@gmail.com",
       first_name: "Mark",
       last_name: "Bernardino",
       password: "password",
@@ -118,7 +128,8 @@ User.create!(
       role_id: member.id },
 
     # member_8
-    { email: "rachielrivano@gmail.com",
+    { member_id_number: "0124-012",
+      email: "rachielrivano@gmail.com",
       first_name: "Rachiel",
       last_name: "Rivano",
       password: "password",
@@ -126,7 +137,9 @@ User.create!(
       role_id: member.id },
 
     # member_9
-    { email: "paullustre@gmail.com",
+
+    { member_id_number: "0124-013",
+      email: "paullustre@gmail.com",
       first_name: "Paul Allan",
       last_name: "Lustre",
       password: "password",
@@ -134,7 +147,8 @@ User.create!(
       role_id: member.id },
 
     # member_10
-    { email: "edwardflores@gmail.com",
+    { member_id_number: "0124-014",
+      email: "edwardflores@gmail.com",
       first_name: "Edward",
       last_name: "Flores",
       password: "password",
@@ -142,15 +156,17 @@ User.create!(
       role_id: member.id },
 
     # member_11
-    { email: "milasoriano@gmail.com",
+    { member_id_number: "0124-015",
+      email: "milasoriano@gmail.com",
       first_name: "Mila Grace",
       last_name: "Soriano",
       password: "password",
       birthday: "01/01/1970",
       role_id: member.id },
-    
+
     # member_12
-    { email: "aquinolara@gmail.com",
+    { member_id_number: "0124-016",
+      email: "aquinolara@gmail.com",
       first_name: "Lara Beth",
       last_name: "Aquino",
       password: "password",
@@ -158,7 +174,8 @@ User.create!(
       role_id: member.id },
 
     # member_13
-    { email: "chloegonzales@gmail.com",
+    { member_id_number: "0124-017",
+      email: "chloegonzales@gmail.com",
       first_name: "Chloe Ann",
       last_name: "Gonzales",
       password: "password",
@@ -166,7 +183,8 @@ User.create!(
       role_id: member.id },
 
     # member_14
-    { email: "nathmartinez@gmail.com",
+    { member_id_number: "0124-018",
+      email: "nathmartinez@gmail.com",
       first_name: "Nathaniel Cruz",
       last_name: "Martinez",
       password: "password",
@@ -174,23 +192,26 @@ User.create!(
       role_id: member.id },
 
     # member_15
-    { email: "asherlopez@gmail.com",
-      first_name: "Asher Dominic",
-      last_name: "Lopez",
+    { member_id_number: "0124-019",
+      email: "ashergaza@gmail.com",
+      first_name: "Asher Drake",
+      last_name: "Gaza",
       password: "password",
       birthday: "05/05/1970",
       role_id: member.id },
 
     # member_16
-    { email: "jaydenramos@gmail.com",
+    { member_id_number: "0124-020",
+      email: "jaydenramos@gmail.com",
       first_name: "Jayden Eli",
       last_name: "Ramos",
       password: "password",
       birthday: "06/06/1970",
       role_id: member.id },
-    
+
     # member_17
-    { email: "celinemorales@gmail.com",
+    { member_id_number: "0124-021",
+      email: "celinemorales@gmail.com",
       first_name: "Celine Marie",
       last_name: "Morales",
       password: "password",
@@ -198,7 +219,8 @@ User.create!(
       role_id: member.id },
 
     # member_18
-    { email: "alexacastillo@gmail.com",
+    { member_id_number: "0124-022",
+      email: "alexacastillo@gmail.com",
       first_name: "Alexa Nicole",
       last_name: "Castillo",
       password: "password",
@@ -206,7 +228,8 @@ User.create!(
       role_id: member.id },
 
     # member_19
-    { email: "noahbautista@gmail.com",
+    { member_id_number: "0124-023",
+      email: "noahbautista@gmail.com",
       first_name: "Noah James",
       last_name: "Bautista",
       password: "password",
@@ -214,7 +237,8 @@ User.create!(
       role_id: member.id },
 
     # member_20
-    { email: "sofiamendoza@gmail.com",
+    { member_id_number: "0124-024",
+      email: "sofiamendoza@gmail.com",
       first_name: "Sofia Isla",
       last_name: "Mendoza",
       password: "password",
@@ -222,15 +246,17 @@ User.create!(
       role_id: member.id },
 
     # member_21
-    { email: "rosedelosreyes@gmail.com",
+    { member_id_number: "0124-025",
+      email: "rosedelosreyes@gmail.com",
       first_name: "Rose",
       last_name: "Delos Reyes",
       password: "password",
       birthday: "01/01/1965",
       role_id: member.id },
-    
+
     # member_22
-    { email: "alvareztessa@gmail.com",
+    { member_id_number: "0124-026",
+      email: "alvareztessa@gmail.com",
       first_name: "Tessa Lorraine",
       last_name: "Alvarez",
       password: "password",
@@ -238,7 +264,8 @@ User.create!(
       role_id: member.id },
 
     # member_23
-    { email: "briannarivera@gmail.com",
+    { member_id_number: "0124-027",
+      email: "briannarivera@gmail.com",
       first_name: "Brianna",
       last_name: "Rivera",
       password: "password",
@@ -246,7 +273,8 @@ User.create!(
       role_id: member.id },
 
     # member_24
-    { email: "asherlopez@gmail.com",
+    { member_id_number: "0124-028",
+      email: "asherlopez@gmail.com",
       first_name: "Asher",
       last_name: "Lopez",
       password: "password",
@@ -254,7 +282,8 @@ User.create!(
       role_id: member.id },
 
     # member_25
-    { email: "rileyhernandez@gmail.com",
+    { member_id_number: "0124-029",
+      email: "rileyhernandez@gmail.com",
       first_name: "Riley",
       last_name: "Hernandez",
       password: "password",
@@ -262,15 +291,17 @@ User.create!(
       role_id: member.id },
 
     # member_26
-    { email: "avafernandez@gmail.com",
+    { member_id_number: "0124-030",
+      email: "avafernandez@gmail.com",
       first_name: "Ava",
       last_name: "Fernandez",
       password: "password",
       birthday: "06/06/1965",
       role_id: member.id },
-    
+
     # member_27
-    { email: "jaycevillanueva@gmail.com",
+    { member_id_number: "0124-031",
+      email: "jaycevillanueva@gmail.com",
       first_name: "Jayce",
       last_name: "Villanueva",
       password: "password",
@@ -278,7 +309,8 @@ User.create!(
       role_id: member.id },
 
     # member_28
-    { email: "siennasantiago@gmail.com",
+    { member_id_number: "0124-032",
+      email: "siennasantiago@gmail.com",
       first_name: "Sienna",
       last_name: "Santiago",
       password: "password",
@@ -286,7 +318,8 @@ User.create!(
       role_id: member.id },
 
     # member_29
-    { email: "tylergonzaga@gmail.com",
+    { member_id_number: "0124-033",
+      email: "tylergonzaga@gmail.com",
       first_name: "Tyler",
       last_name: "Gonzaga",
       password: "password",
@@ -294,7 +327,8 @@ User.create!(
       role_id: member.id },
 
     # member_30
-    { email: "jasonlim@gmail.com",
+    { member_id_number: "0124-034",
+      email: "jasonlim@gmail.com",
       first_name: "Jason",
       last_name: "Lim",
       password: "password",
@@ -304,87 +338,76 @@ User.create!(
   ]
 )
 
-carlo_user = User.find_by(email: "crlxltbr@gmail.com")
+# carlo_user = User.find_by(email: "crlxltbr@gmail.com")
 
 # puts "Creating contribution..."
 # Contribution.create(
 #   [
 #     { user_id: carlo_user.id,
 #       amount: 50,
-#       month: "January",
-#       year: "2023"  },
-      
-#       { user_id: carlo_user.id,
-#       amount: 50,
-#       month: "February",
-#       year: "2023"  },
-      
-#       { user_id: carlo_user.id,
-#       amount: 50,
-#       month: "March",
-#       year: "2023"  },
+#       month: "2024/01/01", },
 
 #       { user_id: carlo_user.id,
 #       amount: 50,
-#       month: "April",
-#       year: "2023"  },
-      
-#       { user_id: carlo_user.id,
-#       amount: 50,
-#       month: "May",
-#       year: "2023"  },
-      
-#       { user_id: carlo_user.id,
-#       amount: 50,
-#       month: "June",
-#       year: "2023"  },
+#       month: "2024/02/01", },
 
 #       { user_id: carlo_user.id,
 #       amount: 50,
-#       month: "July",
-#       year: "2023"  },
-      
-#       { user_id: carlo_user.id,
-#       amount: 50,
-#       month: "August",
-#       year: "2023"  },
-      
-#       { user_id: carlo_user.id,
-#       amount: 50,
-#       month: "September",
-#       year: "2023"  },
+#       month: "2024/03/01", },
 
 #       { user_id: carlo_user.id,
 #       amount: 50,
-#       month: "October",
-#       year: "2023"  },
-      
+#       month: "2024/04/01", },
+
 #       { user_id: carlo_user.id,
 #       amount: 50,
-#       month: "November",
-#       year: "2023"  },
-      
+#       month: "2024/05/01", },
+
 #       { user_id: carlo_user.id,
 #       amount: 50,
-#       month: "December",
-#       year: "2023"  },
+#       month: "2024/06/01", },
+
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "2024/07/01", },
+
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "2024/08/01", },
+
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "2024/09/01", },
+
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "2024/10/01", },
+
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "2024/11/01", },
+
+#       { user_id: carlo_user.id,
+#       amount: 50,
+#       month: "2024/12/01", },
 #   ]
 # )
+
 
 puts "Creating claim request type..."
 ClaimRequestType.create!(
   [
     { name: "Hospitalization",
       amount: "5000" },
-      
+
     { name: "Nuptial",
       amount: "2500" },
 
     { name: "Funeral",
-      amount: "5000" }, 
+      amount: "5000" },
 
     { name: "Retirement",
-      amount: "5000" },    
+      amount: "5000" },
   ]
 )
 
@@ -439,22 +462,22 @@ transportation_category = SalesCategory.find_by(name: "Transportation")
 # misc_repair_category = SalesCategory.find_by(name: "Misc/Repair")
 cash_deposit_category = SalesCategory.find_by(name: "Cash Deposit")
 
-puts "Creating daily sales..."
-DailySale.create!(
-  [
-    { sales_category_id: canteen_sales_category.id,
-    amount: "5433",
-    sales_date: "13/05/2024" },
+# puts "Creating daily sales..."
+# DailySale.create!(
+#   [
+#     { sales_category_id: canteen_sales_category.id,
+#     amount: "7250.00",
+#     sales_date: "25/09/2024" },
 
-    { sales_category_id: softdrinks_category.id,
-      amount: "6050",
-      sales_date: "13/05/2024" },
+#     { sales_category_id: softdrinks_category.id,
+#       amount: "2300.00",
+#       sales_date: "25/09/2024" },
 
-    { sales_category_id: mineral_category.id,
-    amount: "1000",
-    sales_date: "13/05/2024" },
-  ]
-)
+#     { sales_category_id: mineral_category.id,
+#     amount: "900.00",
+#     sales_date: "25/09/2024" },
+#   ]
+# )
 
 puts "Creating expenses category..."
 ExpenseCategory.create!(
@@ -465,14 +488,14 @@ ExpenseCategory.create!(
 puts "Creating daily expenses category..."
 electricity_expenses_category = ExpenseCategory.find_by(name: "Electricity")
 
-puts "Creating daily expenses..."
-DailyExpense.create!(
-  [
-    { expense_category_id: electricity_expenses_category.id,
-    amount: "15000",
-    expense_date: "10/08/2024" },
-  ]
-)
+# puts "Creating daily expenses..."
+# DailyExpense.create!(
+#   [
+#     { expense_category_id: electricity_expenses_category.id,
+#     amount: "3000.00",
+#     expense_date: "25/09/2024" },
+#   ]
+# )
 
 puts "Creating stalls..."
 Stall.create!(

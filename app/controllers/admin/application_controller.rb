@@ -22,11 +22,11 @@ module Admin
           'admin/expense_reports',
           'admin/cashflow_reports'
         ]
-  
+
         redirect_to '/admin/cashflow_reports' if current_user.is_president? && !president_controllers.include?(params["controller"])
 
         redirect_to '/', alert: "You do not have access to this resouce" unless current_user.is_admin? || current_user.is_secretary? || current_user.is_president?
-  
+
     end
 
     # Override this value to specify the number of elements to display at a time

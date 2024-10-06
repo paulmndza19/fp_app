@@ -58,6 +58,6 @@ and renders all form fields for a resource's editable attributes.
   <% end -%>
 
   <div class="">
-    <%= f.submit class: "form-actions flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90" %>
+    <%= f.submit class: "form-actions flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90", data: { disable_with: false } %>
   </div>
 <% end %>

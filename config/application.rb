@@ -24,5 +24,8 @@ module Rails7DeviseExample
     config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, BigDecimal, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
     config.time_zone = 'Asia/Manila'
     config.active_record.default_timezone = :utc
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+    end
   end
 end
