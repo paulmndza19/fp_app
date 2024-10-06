@@ -91,16 +91,24 @@ module Admin
             COALESCE(TO_CHAR(DATE(ds.sales_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
             #{category_columns_sql}
             SUM(ds.amount) AS \"Total Canteen Income\",
-            COALESCE(SUM(rp.amount), 0) AS \"Kiosk Income\",
-            SUM(ds.amount) + COALESCE(SUM(rp.amount), 0) AS \"Total Income\"
+            COALESCE(SUM(rp.total_rental_payments), 0) AS \"Kiosk Income\",
+            SUM(ds.amount) + COALESCE(SUM(rp.total_rental_payments), 0) AS \"Total Income\"
         FROM
             daily_sales ds
         JOIN
             sales_categories sc ON ds.sales_category_id = sc.id
-        LEFT JOIN rental_payments rp ON DATE(ds.sales_date) = DATE(rp.created_at)
+        LEFT JOIN (
+          SELECT
+            DATE(created_at) AS payment_date,
+            SUM(amount) AS total_rental_payments
+          FROM
+            rental_payments
+          GROUP BY
+            DATE(created_at)
+        ) rp ON DATE(ds.sales_date) = rp.payment_date
         WHERE ds.sales_date BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
         GROUP BY
-            ROLLUP (DATE(ds.sales_date))
+          ROLLUP (DATE(ds.sales_date))
         ORDER BY
           DATE(ds.sales_date);
       "

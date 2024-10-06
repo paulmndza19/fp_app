@@ -81,16 +81,24 @@ module Admin
       report_sql = "
         SELECT
           COALESCE(TO_CHAR(DATE(ds.sales_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
-          SUM(ds.amount) + COALESCE(SUM(rp.amount), 0) AS \"Total Sales\",
+          SUM(ds.amount) + COALESCE(SUM(rp.total_rental_payments), 0) AS \"Total Sales\",
           COALESCE(SUM(DISTINCT es.amount), 0) AS \"Total Expenses\",
-          (SUM(ds.amount) + COALESCE(SUM(rp.amount), 0)) -  COALESCE(SUM(es.amount), 0) AS \"Total Income\"
+          (SUM(ds.amount) + COALESCE(SUM(rp.total_rental_payments), 0)) - COALESCE(SUM(DISTINCT es.amount), 0) AS \"Total Income\"
         FROM
           daily_sales ds
-        LEFT JOIN daily_expenses es ON DATE(ds.sales_date) =  DATE(es.expense_date)
-        LEFT JOIN rental_payments rp ON DATE(ds.sales_date) = DATE(rp.created_at)
+        LEFT JOIN (
+          SELECT
+            DATE(created_at) AS payment_date,
+            SUM(amount) AS total_rental_payments
+          FROM
+            rental_payments
+          GROUP BY
+            DATE(created_at)
+        ) rp ON DATE(ds.sales_date) = rp.payment_date
+        LEFT JOIN daily_expenses es ON DATE(ds.sales_date) = DATE(es.expense_date)
         WHERE ds.sales_date BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
         GROUP BY
-            ROLLUP (DATE(ds.sales_date))
+          ROLLUP (DATE(ds.sales_date))
         ORDER BY
           DATE(ds.sales_date);
       "
