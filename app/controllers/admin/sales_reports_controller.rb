@@ -91,7 +91,7 @@ module Admin
             COALESCE(TO_CHAR(DATE(ds.sales_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
             #{category_columns_sql}
             SUM(ds.amount) AS \"Total Canteen Income\",
-            COALESCE(SUM(rp.total_rental_payments), 0) AS \"Kiosk Income\",
+            COALESCE(SUM(DISTINCT(rp.total_rental_payments)), 0) AS \"Kiosk Income\",
             SUM(ds.amount) + COALESCE(SUM(rp.total_rental_payments), 0) AS \"Total Income\"
         FROM
             daily_sales ds
