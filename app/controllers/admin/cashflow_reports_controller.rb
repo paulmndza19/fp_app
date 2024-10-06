@@ -83,7 +83,7 @@ module Admin
           COALESCE(TO_CHAR(DATE(ds.sales_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
           SUM(DISTINCT(ds.amount)) + COALESCE(SUM(DISTINCT(rp.total_rental_payments)), 0) AS \"Total Sales\",
           COALESCE(SUM(DISTINCT es.amount), 0) AS \"Total Expenses\",
-          (SUM(ds.amount) + COALESCE(SUM(DISTINCT(rp.total_rental_payments)), 0)) - COALESCE(SUM(DISTINCT es.amount), 0) AS \"Total Income\"
+          (SUM(DISTINCT(ds.amount)) + COALESCE(SUM(DISTINCT(rp.total_rental_payments)), 0)) - COALESCE(SUM(DISTINCT es.amount), 0) AS \"Total Income\"
         FROM
           daily_sales ds
         LEFT JOIN (
