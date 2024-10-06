@@ -14,7 +14,15 @@ module Admin
 
     def authenticate_user!
       super
-        redirect_to '/admin/users' if current_user.is_secretary? && params["controller"] != 'admin/users'
+        # redirect_to '/admin/users' if current_user.is_secretary? && params["controller"] != 'admin/users'
+
+        secretary_controllers = [
+          'admin/users',
+          'admin/membership_fees',
+          'admin/archives'
+        ]
+        
+        redirect_to '/admin/users' if current_user.is_secretary? && !secretary_controllers.include?(params["controller"])
 
         president_controllers = [
           'admin/sales_reports',
@@ -22,10 +30,19 @@ module Admin
           'admin/expense_reports',
           'admin/cashflow_reports'
         ]
-
+        
         redirect_to '/admin/cashflow_reports' if current_user.is_president? && !president_controllers.include?(params["controller"])
+      
+        auditor_controllers = [
+          'admin/sales_reports',
+          'admin/kiosk_rental_reports',
+          'admin/expense_reports',
+          'admin/cashflow_reports'
+        ]
 
-        redirect_to '/', alert: "You do not have access to this resouce" unless current_user.is_admin? || current_user.is_secretary? || current_user.is_president?
+        redirect_to '/admin/cashflow_reports' if current_user.is_auditor? && !auditor_controllers.include?(params["controller"])
+
+        redirect_to '/', alert: "You do not have access to this resouce" unless current_user.is_admin? || current_user.is_secretary? || current_user.is_president?|| current_user.is_auditor?
 
     end
 

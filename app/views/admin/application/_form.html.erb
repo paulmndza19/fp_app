@@ -16,11 +16,11 @@ and renders all form fields for a resource's editable attributes.
 
 
   
-<%= form_for([namespace, page.resource], html: { class: "form" }) do |f| %>
+<%= form_for([namespace, page.resource], html: { class: "form space-y-6" }) do |f| %>
 
   <% if page.resource.errors.any? %>
-    <div id="error_explanation">
-      <h2>
+    <div id="error_explanation" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg">
+      <h2 class="font-semibold text-lg">
         <%= t(
           "administrate.form.errors",
           pluralized_errors: pluralize(page.resource.errors.count, t("administrate.form.error")),
@@ -28,7 +28,7 @@ and renders all form fields for a resource's editable attributes.
         ) %>
       </h2>
 
-      <ul>
+      <ul class="mt-2 list-disc list-inside text-sm">
         <% page.resource.errors.full_messages.each do |message| %>
           <li class="flash-error"><%= message %></li>
         <% end %>
@@ -37,18 +37,18 @@ and renders all form fields for a resource's editable attributes.
   <% end %>
 
   <% page.attributes(controller.action_name).each do |title, attributes| -%>
-    <fieldset class="<%= "field-unit--nested" if title.present? %>">
+    <fieldset class="<%= title.present? ? 'field-unit--nested' : '' %>">
       <% if title.present? %>
-        <legend><%= t "helpers.label.#{f.object_name}.#{title}", default: title %></legend>
+        <legend class="text-lg font-medium mb-4"><%= t "helpers.label.#{f.object_name}.#{title}", default: title %></legend>
       <% end %>
 
       <% attributes.each do |attribute| %>
-        <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-          <%= render_field attribute, f: f %>
+        <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %> mb-4">
+          <%= render_field attribute, f: f, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" %>
 
           <% hint_key = "administrate.field_hints.#{page.resource_name}.#{attribute.name}" %>
           <% if I18n.exists?(hint_key) -%>
-            <div class="field-unit__hint">
+            <div class="field-unit__hint text-sm text-gray-500 mt-1">
               <%= I18n.t(hint_key) %>
             </div>
           <% end -%>
@@ -57,7 +57,8 @@ and renders all form fields for a resource's editable attributes.
     </fieldset>
   <% end -%>
 
-  <div class="">
-    <%= f.submit class: "form-actions flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90", data: { disable_with: false } %>
+  <div class="mt-6">
+    <%= f.submit class: "form-actions flex w-full justify-center rounded bg-primary p-3 text-white font-medium hover:bg-primary-dark transition-all duration-200 ease-in-out", data: { disable_with: false } %>
   </div>
 <% end %>
+

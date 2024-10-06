@@ -43,7 +43,7 @@ class UserDashboard < Administrate::BaseDashboard
     start_of_membership: Field::Date,
     no_of_children: Field::Number,
     parent_name: Field::String,
-    office: Field::Select.with_options(collection: [nil, 'Faculty', 'Admin']),
+    office: Field::Select.with_options(collection: [nil, 'Permanent', 'Casual']),
     full_time: Field::Boolean,
     last_contribution_month: Field::String
   }.freeze

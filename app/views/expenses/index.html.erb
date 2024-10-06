@@ -13,7 +13,7 @@
               <th
                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
               >
-                Category
+                Expense Category
               </th>
               <th
                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
@@ -23,9 +23,9 @@
               <th
                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
               >
-                Date
+                Expense Date
               </th>
-              <% if @current_user.is_auditor? %>
+              <% if @current_user.is_auditor? || @current_user.is_admin? || @current_user.is_president? %>
                 <th
                   class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                 >
@@ -52,10 +52,10 @@
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <p class="text-gray-900 whitespace-no-wrap">
-                    <%= expense.created_at.strftime('%Y-%m-%d') %>
+                    <%= expense.expense_date.strftime('%Y-%m-%d') %>
                   </p>
                 </td>
-                <% if @current_user.is_auditor? %>
+                <% if @current_user.is_auditor? || @current_user.is_admin? || @current_user.is_president? %>
                   <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p class="text-gray-900 whitespace-no-wrap">
                     <% if expense.document.attached? %>
