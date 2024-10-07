@@ -1,7 +1,7 @@
-Rails.application.routes.draw do  
+Rails.application.routes.draw do
   resources :roles
   resources :claim_request_types
-    
+
   namespace :admin, admin: true do
     resources :contributions, except: %i[edit update destroy]
     resources :roles
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       edit
       update
       show
-    
+
     ]
     resources :membership_fees, except: %i[edit update destroy]
     resources :sales_categories
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :daily_expenses, except: %i[destroy]
 
     resources :tenants
-    resources :late_tenants
+    resources :late_tenants, only: %i[index]
     resources :stalls
     resources :stall_rentals
     resources :rental_payments
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
     resources :audit_trails, only: [:index], path: :activity_log
 
-    resources :archives, only: [:index] do 
+    resources :archives, only: [:index] do
       member do
         put :restore
       end
@@ -49,9 +49,9 @@ Rails.application.routes.draw do
     put "/archives/:id/restore", to: "archives#restore"
 
     root to: "contributions#index"
-    
+
   end
-  
+
   resources :contributions
   resources :claim_requests, only: [:index, :new, :create]
   resources :audit_trails, only: [:index], path: :activity_log
@@ -66,12 +66,12 @@ Rails.application.routes.draw do
   # get "/home", to: "home#index"
 
   root to: "home#index"
-  
+
   get "/dashboard", to: "home#dashboard"
 
   get "/bylaws", to: "bylaws#index"
-  
+
   get "/sales", to: "sales#index"
-  
+
   get "/expenses", to: "expenses#index"
 end
