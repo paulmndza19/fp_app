@@ -6,7 +6,7 @@ class LateTenant < Tenant
 
   default_scope do
     left_joins(stall_rentals: :rental_payments)
-    .where('rental_payments.payment_date <= ?', DAYS_FOR_LATE_PAYMENT.days.ago)
+    .where('rental_payments.payment_date <= ?', DAYS_FOR_LATE_PAYMENT.days.ago.beginning_of_day)
     .where('rental_payments.deleted_at IS NULL') # Ignore soft-deleted payments
     .distinct
   end
