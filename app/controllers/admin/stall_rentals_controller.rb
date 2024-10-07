@@ -15,10 +15,10 @@ module Admin
         # Perform search with Algolia
         algolia_results = StallRental.algolia_search(search_term)
         resource_ids = algolia_results.map(&:id)
-        resources = StallRental.where(id: resource_ids).page(params[:page]).per(records_per_page)
+        resources = StallRental.where(id: resource_ids).page(params[:_page]).per(records_per_page)
       else
         # Fallback to showing all resources if no search term is provided
-        resources = StallRental.page(params[:page]).per(records_per_page)
+        resources = StallRental.page(params[:_page]).per(records_per_page)
       end
 
       page = Administrate::Page::Collection.new(dashboard, order: order)

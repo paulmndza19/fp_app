@@ -5,6 +5,11 @@ class User < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
+  # validates :member_id_member, uniqueness: true
+  # validates :first_name, uniqueness: true
+  # validates :member_id_member, presence: true
+  # validates :first_name, presence: true
+
   algoliasearch do
     attribute :first_name, :last_name, :email, :member_id_number
     # Add other configuration options if needed
@@ -29,7 +34,14 @@ class User < ApplicationRecord
 
   # before_validation :set_member_id, on: :create
 
-  validates :member_id_number, uniqueness: true, on: :create
+  # validates :member_id_number, uniqueness: true, on: :create
+
+  validates :member_id_number, uniqueness: true
+  validates :member_id_number, presence: true
+  
+  # attr_accessor :skip_uniqueness_check  
+  # validates :member_id_number, uniqueness: true, unless: :skip_uniqueness_check?
+  # validates :member_id_number, presence: true
 
   MEMBER_ID_NUMBER_LENGTH = 3
 

@@ -11,10 +11,10 @@ module Admin
         # Perform search with Algolia
         algolia_results = ClaimRequest.algolia_search(search_term)
         resource_ids = algolia_results.map(&:id)
-        resources = ClaimRequest.where(id: resource_ids).includes(:claim_request_type).page(params[:page]).per(records_per_page)
+        resources = ClaimRequest.where(id: resource_ids).includes(:claim_request_type).page(params[:_page]).per(records_per_page)
       else
         # Fallback to showing all resources if no search term is provided
-        resources = ClaimRequest.includes(:claim_request_type).page(params[:page]).per(records_per_page)
+        resources = ClaimRequest.includes(:claim_request_type).page(params[:_page]).per(records_per_page)
       end
 
       page = Administrate::Page::Collection.new(dashboard, order: order)

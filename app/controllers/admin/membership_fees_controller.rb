@@ -16,10 +16,10 @@ module Admin
         # Perform search with Algolia
         algolia_results = MembershipFee.algolia_search(search_term)
         resource_ids = algolia_results.map(&:id)
-        resources = MembershipFee.where(id: resource_ids).page(params[:page]).per(records_per_page)
+        resources = MembershipFee.where(id: resource_ids).page(params[:_page]).per(records_per_page)
       else
         # Fallback to showing all resources if no search term is provided
-        resources = MembershipFee.page(params[:page]).per(records_per_page)
+        resources = MembershipFee.page(params[:_page]).per(records_per_page)
       end
 
       page = Administrate::Page::Collection.new(dashboard, order: order)

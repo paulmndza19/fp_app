@@ -13,11 +13,11 @@ module Admin
         resource_ids = algolia_results.map(&:id)
         resources = Contribution.where(id: resource_ids)
           .includes(:user)
-          .page(params[:page])
+          .page(params[:_page])
           .per(records_per_page)
       else
         # Fallback to showing all resources if no search term is provided
-        resources = Contribution.includes(:user).page(params[:page]).per(records_per_page)
+        resources = Contribution.includes(:user).page(params[:_page]).per(records_per_page)
       end
 
       page = Administrate::Page::Collection.new(dashboard, order: order)
