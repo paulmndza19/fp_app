@@ -1,6 +1,8 @@
 class Contribution < ApplicationRecord
   include AlgoliaSearch
 
+  attr_accessor :skip_uniqueness_check
+
   algoliasearch do
     attribute :receipt_number, :name
     # Add other configuration options if needed
@@ -21,7 +23,6 @@ class Contribution < ApplicationRecord
 
   # before_validation :set_receipt_number
 
-  attr_accessor :skip_uniqueness_check  
   validates :receipt_number, uniqueness: true, unless: :skip_uniqueness_check?
   validates :receipt_number, presence: true
 

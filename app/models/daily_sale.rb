@@ -9,7 +9,7 @@ class DailySale < ApplicationRecord
   has_one_attached :document
 
   validates :document, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
-  
+
   belongs_to :sales_category
 
   delegate :name, to: :sales_category
@@ -26,5 +26,4 @@ class DailySale < ApplicationRecord
 
   validates :amount, presence: true
   validates :sales_date, presence: true
-  
 end

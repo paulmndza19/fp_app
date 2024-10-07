@@ -4,5 +4,4 @@ class Stall < ApplicationRecord
 
     validates :name, uniqueness: true
     validates :name, presence: true
-    # validates :name, presence: true, format: { with: /\A[a-zA-Z\s]+\z/, message: "only allows letters and spaces" }
 end

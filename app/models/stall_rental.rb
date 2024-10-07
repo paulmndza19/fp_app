@@ -2,7 +2,7 @@ class StallRental < ApplicationRecord
   include AlgoliaSearch
 
   algoliasearch do
-    attribute :display_name
+    attribute :stall_name, :tenant_name
     # Add other configuration options if needed
   end
 
@@ -11,6 +11,9 @@ class StallRental < ApplicationRecord
 
   belongs_to :tenant
   belongs_to :stall
+
+  delegate :name, to: :tenant, prefix: true
+  delegate :name, to: :stall, prefix: true
 
   has_many :rental_payments
 

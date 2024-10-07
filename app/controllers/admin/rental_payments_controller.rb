@@ -8,6 +8,29 @@ module Admin
     #   send_foo_updated_email(requested_resource)
     # end
 
+    def index
+      search_term = params[:search].to_s.strip
+
+      if search_term.present?
+        # Perform search with Algolia
+        algolia_results = RentalPayment.algolia_search(search_term)
+        resource_ids = algolia_results.map(&:id)
+        resources = RentalPayment.where(id: resource_ids).page(params[:_page]).per(records_per_page)
+      else
+        # Fallback to showing all resources if no search term is provided
+        resources = RentalPayment.page(params[:_page]).per(records_per_page)
+      end
+
+      page = Administrate::Page::Collection.new(dashboard, order: order)
+
+      render locals: {
+        resources: resources,
+        search_term: search_term,
+        page: page,
+        show_search_bar: true
+      }
+    end
+
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`
     # actions.
