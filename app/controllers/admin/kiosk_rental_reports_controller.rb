@@ -80,15 +80,15 @@ module Admin
     def result
       report_sql = "
         SELECT
-          COALESCE(TO_CHAR(DATE(rp.created_at), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
+          COALESCE(TO_CHAR(DATE(rp.payment_date), 'FMDay, FMMonth DD, YYYY'), 'Total') AS \"Date\",
           COALESCE(SUM(rp.amount), 0) AS \"Total Kiosk Payments\"
         FROM
           rental_payments rp
-        WHERE rp.created_at BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
+        WHERE rp.payment_date BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
         GROUP BY
-            ROLLUP (DATE(rp.created_at))
+            ROLLUP (DATE(rp.payment_date))
         ORDER BY
-          DATE(rp.created_at);
+          DATE(rp.payment_date);
       "
 
       ActiveRecord::Base.connection.exec_query(report_sql)

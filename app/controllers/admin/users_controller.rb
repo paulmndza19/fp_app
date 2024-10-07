@@ -25,7 +25,6 @@ module Admin
 
       page = Administrate::Page::Collection.new(dashboard, order: order)
 
-      
       render locals: {
         resources: resources,
         search_term: search_term,

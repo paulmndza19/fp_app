@@ -88,12 +88,12 @@ module Admin
           daily_sales ds
         LEFT JOIN (
           SELECT
-            DATE(created_at) AS payment_date,
+            DATE(payment_date) AS payment_date,
             SUM(amount) AS total_rental_payments
           FROM
             rental_payments
           GROUP BY
-            DATE(rental_payments.created_at)
+            DATE(rental_payments.payment_date)
         ) rp ON DATE(ds.sales_date) = rp.payment_date
         LEFT JOIN (
           SELECT

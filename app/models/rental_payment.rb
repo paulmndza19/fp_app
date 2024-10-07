@@ -4,4 +4,5 @@ class RentalPayment < ApplicationRecord
 
   belongs_to :stall_rental
   validates :amount, presence: true
+  validates :payment_date, presence: true
 end

@@ -99,12 +99,12 @@ module Admin
             sales_categories sc ON ds.sales_category_id = sc.id
         LEFT JOIN (
           SELECT
-            DATE(created_at) AS payment_date,
+            DATE(payment_date) AS payment_date,
             SUM(amount) AS total_rental_payments
           FROM
             rental_payments
           GROUP BY
-            DATE(created_at)
+            DATE(payment_date)
         ) rp ON DATE(ds.sales_date) = rp.payment_date
         WHERE ds.sales_date BETWEEN '#{month.beginning_of_month}' AND '#{month.end_of_month}'
         GROUP BY

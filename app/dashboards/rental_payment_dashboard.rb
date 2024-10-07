@@ -14,6 +14,7 @@ class RentalPaymentDashboard < Administrate::BaseDashboard
       decimals: 2,
     ),
     stall_rental: Field::BelongsTo,
+    payment_date: Field::Date,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -26,7 +27,7 @@ class RentalPaymentDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     stall_rental
     amount
-    created_at
+    payment_date
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,6 +36,7 @@ class RentalPaymentDashboard < Administrate::BaseDashboard
     id
     stall_rental
     amount
+    payment_date
     created_at
     updated_at
   ].freeze
@@ -45,6 +47,7 @@ class RentalPaymentDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     stall_rental
     amount
+    payment_date
   ].freeze
 
   # COLLECTION_FILTERS
