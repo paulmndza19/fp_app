@@ -1,5 +1,25 @@
 class ClaimRequestsController < ApplicationController
-  before_action :set_claim_request, only: %i[ show edit update destroy ]
+  before_action :set_claim_request, only: %i[ show edit update destroy]
+
+  BASE_BENEFIT = 4608
+  ADDITIONAL_RETIREMENT_VALUE = 241.77
+
+  RANGE_TO_VALUE_MAP = {
+    (13..24) => 4608,
+    (25..36) => 4849.77,
+    (37..48) => 5091.54,
+    (49..60) => 5333.31,
+    (61..72) => 5575.08,
+    (73..84) => 5816.85,
+    (85..96) => 6058.62,
+    (97..108) => 6300.39,
+    (109..120) => 6542.16,
+    (121..132) => 6783.93,
+    (133..144) => 7025.70,
+    (145..156) => 7267.47,
+    (157..168) => 7509.24,
+    (169..180) => 7751.01
+  }.freeze
 
   # GET /claim_requests or /claim_requests.json
   def index
@@ -23,6 +43,20 @@ class ClaimRequestsController < ApplicationController
   def create
     @claim_request = ClaimRequest.new(claim_request_params)
     @claim_request.document.attach(claim_request_params[:document])
+
+    @claim_request_type = ClaimRequestType.find(claim_request_params[:claim_request_type_id])
+    if @claim_request_type.name != 'Retirement'
+      @claim_request.amount = @claim_request_type.amount
+    else
+      contribution_count = current_user.contributions.count
+
+      if contribution_count < 13
+        @claim_request.amount = BASE_BENEFIT
+      else
+        base_value = RANGE_TO_VALUE_MAP.select { |range, _| range.include?(contribution_count) }.values.first
+        @claim_request.amount = base_value + ADDITIONAL_RETIREMENT_VALUE
+      end
+    end
 
     respond_to do |format|
       if @claim_request.save

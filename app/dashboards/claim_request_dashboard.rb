@@ -17,6 +17,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     document: Field::ActiveStorage.with_options(index_display_preview: true),
+    amount: ReadOnlyAmount
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -27,6 +28,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     user
     claim_request_type
+    amount
     status
     remarks
     document
@@ -38,6 +40,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
     id
     user
     claim_request_type
+    amount
     status
     remarks
     created_at
@@ -51,6 +54,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     user
     claim_request_type
+    amount
     status
     remarks
   ].freeze
