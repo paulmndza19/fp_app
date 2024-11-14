@@ -62,6 +62,10 @@ as well as a link to its edit page.
           <%# Archive %>
         <% end %>  
       <% end %>
+      <% if accessible_action?(page.resource, :generate_pdf) %>
+        <!-- app/views/contributions/index.html.erb -->
+        <%= link_to 'Download Contributions', generate_pdf_admin_users_path(id: page.resource.id, format: :pdf), class: "button bg-success flex cursor-pointer items-center justify-center gap-2 rounded px-2 py-1 text-base font-medium text-white hover:bg-opacity-80 xsm:px-4" %>
+      <% end %>
     </div>
   </div>
   <section class="main-content__body px-6.5 py-6">

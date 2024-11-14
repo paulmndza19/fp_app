@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   namespace :admin, admin: true do
     resources :contributions, except: %i[edit update destroy]
     resources :roles
-    resources :users
+    resources :users do
+      collection do
+        get :generate_pdf
+      end
+    end
     resources :claim_request_types
     resources :claim_requests, only: %i[
       index

@@ -27,6 +27,7 @@ class HomeController < ApplicationController
     @your_total_contributions = current_user.contributions.sum(:amount)
 
     @your_last_contribution = current_user.contributions.order(created_at: :desc).first
+    @approved_claim_requests = current_user.claim_requests.approved
   end
 
   def create

@@ -22,9 +22,21 @@ class ClaimRequest < ApplicationRecord
   validate :one_claim_per_year, on: :create
   validate :sufficient_contributions, on: :create
 
+  # after_commit :update_timestamps, on: :update
+
+  scope :approved, -> { where(status: 'Approved') }
+
   def type
     claim_request_type.name
   end
+
+  def update_timestamps
+    self.approved_at = Time.zone.now if saved_change_to_status && status.downcase == 'approved'
+    self.rejected_at = Time.zone.now if saved_change_to_status && status.downcase == 'rejected'
+
+    save!
+  end
+
 
     # # Validate on create
     # validate :one_claim_per_year

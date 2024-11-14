@@ -38,8 +38,8 @@ class User < ApplicationRecord
 
   validates :member_id_number, uniqueness: true
   validates :member_id_number, presence: true
-  
-  # attr_accessor :skip_uniqueness_check  
+
+  # attr_accessor :skip_uniqueness_check
   # validates :member_id_number, uniqueness: true, unless: :skip_uniqueness_check?
   # validates :member_id_number, presence: true
 
@@ -67,6 +67,10 @@ class User < ApplicationRecord
 
   def is_auditor?
     role.name.downcase == 'auditor'
+  end
+
+  def total_contributions
+    contributions.sum(:amount)
   end
 
   def last_contribution_month

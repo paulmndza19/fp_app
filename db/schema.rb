@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_07_120838) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_13_125037) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_07_120838) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.text "remarks"
+    t.datetime "approved_at", precision: nil
+    t.datetime "rejected_at", precision: nil
     t.index ["claim_request_type_id"], name: "index_claim_requests_on_claim_request_type_id"
     t.index ["user_id"], name: "index_claim_requests_on_user_id"
   end

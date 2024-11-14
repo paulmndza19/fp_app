@@ -105,3 +105,6 @@ gem 'whenever', require: false
 gem 'caxlsx'
 # Search
 gem 'algoliasearch-rails'
+# PDF Generation
+gem 'prawn'
+gem 'prawn-table'

@@ -45,7 +45,11 @@ class UserDashboard < Administrate::BaseDashboard
     parent_name: Field::String,
     office: Field::Select.with_options(collection: [nil, 'Permanent', 'Casual']),
     full_time: Field::Boolean,
-    last_contribution_month: Field::String
+    last_contribution_month: Field::String,
+    total_contributions: Field::Number.with_options(
+      prefix: "₱",
+      decimals: 2,
+    )
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -61,6 +65,7 @@ class UserDashboard < Administrate::BaseDashboard
     birthday
     role
     last_contribution_month
+    total_contributions
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -83,6 +88,7 @@ class UserDashboard < Administrate::BaseDashboard
     created_at
     updated_at
     last_contribution_month
+    total_contributions
   ].freeze
 
   # FORM_ATTRIBUTES

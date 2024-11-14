@@ -30,9 +30,14 @@ module Admin
 
     def update
       super
+      @claim_request = ClaimRequest.find(params[:id])
       if params[:claim_request][:status] == 'Approved'
+        @claim_request.approved_at = Time.zone.now
+        @claim_request.save
         ClaimRequestUpdateMailer.approval_email(requested_resource).deliver_now
       else
+        @claim_request.rejected_at = Time.zone.now
+        @claim_request.save
         ClaimRequestUpdateMailer.rejection_email(requested_resource).deliver_now
       end
     end
