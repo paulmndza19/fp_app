@@ -1,6 +1,6 @@
-<% if action_name == 'index' %>
+<% if action_name == 'index' || action_name == 'show' %>
   <%= field.data.name %>
-<% else %>
+<% elsif controller.action_name == 'edit' %>
   <div class="field-unit">
     <%= f.label field.attribute %>
     <%= if controller.action_name == 'edit'
