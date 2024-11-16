@@ -134,7 +134,7 @@ as defined by the routes in the `admin/` namespace
                   </svg>
                   <span><%= display_resource_name(resource) %></span>
                   <% if display_resource_name(resource) == "Claim Requests" %>
-                  <% pending_request_count = ClaimRequest.where(status: 'pending').count %>
+                  <% pending_request_count = ClaimRequest.where(status: ['Pending', 'pending']).count %>
                   <% if pending_request_count > 0 %>
                     <span class="relative inline-flex items-center justify-center" style="width: 24px; height: 24px; background-color: red; border-radius: 50%;">
                       <span style="color: white; font-size: 12px;"><%= pending_request_count %></span>

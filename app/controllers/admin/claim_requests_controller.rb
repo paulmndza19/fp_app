@@ -44,14 +44,19 @@ module Admin
         end
       end
 
-      @claim_request.save
-      super
+      respond_to do |format|
+        if @claim_request.save
+          redirect_to("/admin/claim_requests/#{@claim_request.id}")
+          return
+        else
+          render :new, status: :unprocessable_entity
+        end
+      end
     end
 
 
 
     def update
-      super
       @claim_request = ClaimRequest.find(params[:id])
       if params[:claim_request][:status] == 'Approved'
         @claim_request.approved_at = Time.zone.now
