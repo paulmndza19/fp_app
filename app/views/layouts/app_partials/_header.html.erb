@@ -27,19 +27,23 @@
         <span class="hidden text-right lg:block">
             <span class="block text-sm text-xl font-medium text-black dark:text-white">
               <% if @current_user.is_admin? %>
-                <%= params[:admin] ? 'FPAdmin - Treasurer' : 'FPAccess' %>
+                <%= params[:admin] ? 'FPAdmin - Treasurer' : 'FPAccess - Treasurer' %>
               <% end %>
 
               <% if @current_user.is_secretary? %>
-                <%= params[:admin] ? 'FPAdmin - Secretary' : 'FPAccess' %>
+                <%= params[:admin] ? 'FPAdmin - Secretary' : 'FPAccess - Secretary' %>
               <% end %>
 
               <% if @current_user.is_president? %>
-                <%= params[:admin] ? 'FPAdmin - President' : 'FPAccess' %>
+                <%= params[:admin] ? 'FPAdmin - President' : 'FPAccess - President' %>
               <% end %>
 
               <% if @current_user.is_auditor? %>
-                <%= params[:admin] ? 'FPAdmin - Auditor' : 'FPAccess' %>
+                <%= params[:admin] ? 'FPAdmin - Auditor' : 'FPAccess - Auditor' %>
+              <% end %>
+
+              <% if @current_user.is_member? %>
+                <%= params[:admin] ? 'FPAccess - Member' : 'FPAccess - Member' %>
               <% end %>
             </span>
         </span>
