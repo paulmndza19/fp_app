@@ -18,7 +18,6 @@ Rails.application.routes.draw do
     #   update
     #   show
     # ]
-    
     resources :membership_fees, except: %i[edit update destroy]
     resources :sales_categories
     resources :daily_sales, except: %i[destroy]
