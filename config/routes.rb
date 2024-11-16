@@ -11,13 +11,14 @@ Rails.application.routes.draw do
       end
     end
     resources :claim_request_types
-    resources :claim_requests, only: %i[
-      index
-      edit
-      update
-      show
-
-    ]
+    resources :claim_requests, except: %i[destroy]
+    # resources :claim_requests, only: %i[
+    #   index
+    #   edit
+    #   update
+    #   show
+    # ]
+    
     resources :membership_fees, except: %i[edit update destroy]
     resources :sales_categories
     resources :daily_sales, except: %i[destroy]
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
     resources :late_tenants, only: %i[index]
     resources :stalls
     resources :stall_rentals
-    resources :rental_payments
+    resources :rental_payments, except: %i[destroy]
 
     resources :sales_reports, only: [:index]
     get "/sales_report_xlsx", to: "sales_reports#download_excel"
