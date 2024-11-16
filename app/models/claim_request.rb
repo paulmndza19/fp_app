@@ -26,6 +26,26 @@ class ClaimRequest < ApplicationRecord
 
   scope :approved, -> { where(status: 'Approved') }
 
+  BASE_BENEFIT = 4608
+  ADDITIONAL_RETIREMENT_VALUE = 241.77
+
+  RANGE_TO_VALUE_MAP = {
+    (13..24) => 4608,
+    (25..36) => 4849.77,
+    (37..48) => 5091.54,
+    (49..60) => 5333.31,
+    (61..72) => 5575.08,
+    (73..84) => 5816.85,
+    (85..96) => 6058.62,
+    (97..108) => 6300.39,
+    (109..120) => 6542.16,
+    (121..132) => 6783.93,
+    (133..144) => 7025.70,
+    (145..156) => 7267.47,
+    (157..168) => 7509.24,
+    (169..180) => 7751.01
+  }.freeze
+
   def type
     claim_request_type.name
   end

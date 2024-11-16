@@ -57,6 +57,7 @@ class ClaimRequestDashboard < Administrate::BaseDashboard
     amount
     status
     remarks
+    document
   ].freeze
 
   # COLLECTION_FILTERS

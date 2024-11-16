@@ -27,6 +27,28 @@ module Admin
       }
     end
 
+    def create
+      @claim_request = ClaimRequest.new(resource_params)
+
+      @claim_request_type = ClaimRequestType.find(resource_params[:claim_request_type_id])
+      if @claim_request_type.name != 'Retirement'
+        @claim_request.amount = @claim_request_type.amount
+      else
+        contribution_count = current_user.contributions.count
+
+        if contribution_count < 13
+          @claim_request.amount = ClaimRequest::BASE_BENEFIT
+        else
+          base_value = ClaimRequest::RANGE_TO_VALUE_MAP.select { |range, _| range.include?(contribution_count) }.values.first
+          @claim_request.amount = base_value + ClaimRequest::ADDITIONAL_RETIREMENT_VALUE
+        end
+      end
+
+      @claim_request.save
+      super
+    end
+
+
 
     def update
       super

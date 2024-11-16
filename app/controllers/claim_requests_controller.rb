@@ -51,10 +51,10 @@ class ClaimRequestsController < ApplicationController
       contribution_count = current_user.contributions.count
 
       if contribution_count < 13
-        @claim_request.amount = BASE_BENEFIT
+        @claim_request.amount = ClaimRequest::BASE_BENEFIT
       else
-        base_value = RANGE_TO_VALUE_MAP.select { |range, _| range.include?(contribution_count) }.values.first
-        @claim_request.amount = base_value + ADDITIONAL_RETIREMENT_VALUE
+        base_value = ClaimRequest::RANGE_TO_VALUE_MAP.select { |range, _| range.include?(contribution_count) }.values.first
+        @claim_request.amount = base_value + ClaimRequest::ADDITIONAL_RETIREMENT_VALUE
       end
     end
 
